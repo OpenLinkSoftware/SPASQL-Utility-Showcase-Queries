@@ -18,7 +18,9 @@ INSERT
    {
       GRAPH <urn:rdbms:inference:reasoning:demo:1>
          {
-            ## Class derived from Virtuoso's Customers Table
+            ### Organization Class Instances (i.e. Organizations) ###
+	    
+	    ## Class derived from Virtuoso's Customers Table
             <http://demo.openlinksw.com/schemas/Demo/Customers>
                rdfs:subClassOf   foaf:Organization   .
 
@@ -36,8 +38,14 @@ INSERT
 
             ## Class derived from PrestoDB Customer Table
             <http://demo.openlinksw.com/schemas/PrestoDB/customer>
-            rdfs:subClassOf   foaf:Organization   .
-
+               rdfs:subClassOf   foaf:Organization   .
+	       
+            ### Person Class Instances (i.e. People) ###
+	    
+	    ## Class derived from Virtuoso's Employees Table
+            <http://demo.openlinksw.com/schemas/Demo/Employees>
+	       rdfs:subClassOf   foaf:Person   .
+	       
             ## Class derived from Informix Customer Table
             <http://demo.openlinksw.com/schemas/informix/customer>
                rdfs:subClassOf   foaf:Person   .
