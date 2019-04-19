@@ -1,51 +1,58 @@
-GRANT SELECT ON "csv"."demo"."articles" to SPARQL_SELECT;
-GRANT SELECT ON "csv"."demo"."companies" to SPARQL_SELECT;
-GRANT SELECT ON "csv"."demo"."investments" to SPARQL_SELECT;
-GRANT SELECT ON "csv"."demo"."investors" to SPARQL_SELECT;
+grant select on "csv"."demo"."articles" to SPARQL_SELECT;
+grant select on "csv"."demo"."companies" to SPARQL_SELECT;
+grant select on "csv"."demo"."investments" to SPARQL_SELECT;
+grant select on "csv"."demo"."investors" to SPARQL_SELECT;
 
 
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-CREATE  IRI CLASS csv:articles "http://^{URIQADefaultHost}^/csv/articles/id/%U#this" (in _id varchar not null) . ;
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+create iri class csv:articles "http://^{URIQADefaultHost}^/csv/articles/id/%U#this" (in _id varchar not null) . ;
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-CREATE  IRI CLASS csv:companies "http://^{URIQADefaultHost}^/csv/companies/id/%U#this" (in _id varchar not null) . ;
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+create iri class csv:companies "http://^{URIQADefaultHost}^/csv/companies/id/%U#this" (in _id varchar not null) . ;
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-CREATE  IRI CLASS csv:investments "http://^{URIQADefaultHost}^/csv/investments/id/%U#this" (in _id varchar not null) . ;
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+create iri class csv:investments "http://^{URIQADefaultHost}^/csv/investments/id/%U#this" (in _id varchar not null) . ;
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-CREATE  IRI CLASS csv:investors "http://^{URIQADefaultHost}^/csv/investors/id/%U#this" (in _id varchar not null) . ;
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+create iri class csv:investors "http://^{URIQADefaultHost}^/csv/investors/id/%U#this" (in _id varchar not null) . ;
 
 
-DROP VIEW "csv"."demo"."csv__Total"; 
-CREATE  VIEW "csv"."demo"."csv__Total" as select (cnt0*cnt1)+(cnt2*cnt3)+(cnt4*cnt5)+(cnt6*cnt7) AS cnt FROM 
- (SELECT COUNT(*) cnt0 FROM "csv"."demo"."articles") tb0, 
- (SELECT COUNT(*)+1 as cnt1 FROM DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.articles'  and "COLUMN" <> '_IDN') tb1,
- (SELECT COUNT(*) cnt2 FROM "csv"."demo"."companies") tb2, 
- (SELECT COUNT(*)+1 as cnt3 FROM DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.companies'  and "COLUMN" <> '_IDN') tb3,
- (SELECT COUNT(*) cnt4 FROM "csv"."demo"."investments") tb4, 
- (SELECT COUNT(*)+1 as cnt5 FROM DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.investments'  and "COLUMN" <> '_IDN') tb5,
- (SELECT COUNT(*) cnt6 FROM "csv"."demo"."investors") tb6, 
- (SELECT COUNT(*)+1 as cnt7 FROM DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.investors'  and "COLUMN" <> '_IDN') tb7
+create view "csv"."demo"."articlesCount" as select count (*) as cnt from "csv"."demo"."articles"; 
+grant select on "csv"."demo"."articlesCount" to SPARQL_SELECT; 
+create view "csv"."demo"."companiesCount" as select count (*) as cnt from "csv"."demo"."companies"; 
+grant select on "csv"."demo"."companiesCount" to SPARQL_SELECT; 
+create view "csv"."demo"."investmentsCount" as select count (*) as cnt from "csv"."demo"."investments"; 
+grant select on "csv"."demo"."investmentsCount" to SPARQL_SELECT; 
+create view "csv"."demo"."investorsCount" as select count (*) as cnt from "csv"."demo"."investors"; 
+grant select on "csv"."demo"."investorsCount" to SPARQL_SELECT; 
+drop view "csv"."demo"."csv__Total"; 
+create view "csv"."demo"."csv__Total" as select (cnt0*cnt1)+(cnt2*cnt3)+(cnt4*cnt5)+(cnt6*cnt7) AS cnt from 
+ (select count(*) cnt0 from "csv"."demo"."articles") tb0, 
+ (select count(*)+1 as cnt1 from DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.articles'  and "COLUMN" <> '_IDN') tb1,
+ (select count(*) cnt2 from "csv"."demo"."companies") tb2, 
+ (select count(*)+1 as cnt3 from DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.companies'  and "COLUMN" <> '_IDN') tb3,
+ (select count(*) cnt4 from "csv"."demo"."investments") tb4, 
+ (select count(*)+1 as cnt5 from DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.investments'  and "COLUMN" <> '_IDN') tb5,
+ (select count(*) cnt6 from "csv"."demo"."investors") tb6, 
+ (select count(*)+1 as cnt7 from DB.DBA.TABLE_COLS where "TABLE" = 'csv.demo.investors'  and "COLUMN" <> '_IDN') tb7
 ; 
-GRANT SELECT ON "csv"."demo"."csv__Total" to SPARQL_SELECT; 
+grant select on "csv"."demo"."csv__Total" to SPARQL_SELECT; 
 
 
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-PREFIX csv-stat: <http://demo.openlinksw.com:8890/csv/stat#> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX void: <http://rdfs.org/ns/void#> 
-PREFIX scovo: <http://purl.org/NET/scovo#> 
-PREFIX aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
-
-ALTER QUAD STORAGE virtrdf:DefaultQuadStorage 
- FROM "csv"."demo"."articles" as articles_s
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+prefix csv-stat: <http://demo.openlinksw.com/csv/stat#> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix void: <http://rdfs.org/ns/void#> 
+prefix scovo: <http://purl.org/NET/scovo#> 
+prefix aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
+alter quad storage virtrdf:DefaultQuadStorage 
+ from "csv"."demo"."articles" as articles_s
  { 
-   CREATE csv:qm-articles AS GRAPH iri ("http://^{URIQADefaultHost}^/csv#")  
+   create csv:qm-articles as graph iri ("http://^{URIQADefaultHost}^/csv#")  
     { 
-      # Maps FROM columns of "csv.demo.articles"
+      # Maps from columns of "csv.demo.articles"
       csv:articles (articles_s."id")  a csv:articles ;
       csv:author articles_s."author" as csv:demo-articles-author ;
       csv:companies articles_s."companies" as csv:demo-articles-companies ;
@@ -68,18 +75,18 @@ ALTER QUAD STORAGE virtrdf:DefaultQuadStorage
 ;
 
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-PREFIX csv-stat: <http://demo.openlinksw.com:8890/csv/stat#> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX void: <http://rdfs.org/ns/void#> 
-PREFIX scovo: <http://purl.org/NET/scovo#> 
-PREFIX aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
-ALTER QUAD STORAGE virtrdf:DefaultQuadStorage 
- FROM "csv"."demo"."companies" as companies_s
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+prefix csv-stat: <http://demo.openlinksw.com/csv/stat#> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix void: <http://rdfs.org/ns/void#> 
+prefix scovo: <http://purl.org/NET/scovo#> 
+prefix aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
+alter quad storage virtrdf:DefaultQuadStorage 
+ from "csv"."demo"."companies" as companies_s
  { 
-   CREATE csv:qm-companies AS GRAPH iri ("http://^{URIQADefaultHost}^/csv#")  
+   create csv:qm-companies as graph iri ("http://^{URIQADefaultHost}^/csv#")  
     { 
-      # Maps FROM columns of "csv.demo.companies"
+      # Maps from columns of "csv.demo.companies"
       csv:companies (companies_s."id")  a csv:companies ;
       csv:______blog_feed_url companies_s."______blog_feed_url" as csv:demo-companies-______blog_feed_url ;
       csv:blog_url companies_s."blog_url" as csv:demo-companies-blog_url ;
@@ -116,18 +123,18 @@ ALTER QUAD STORAGE virtrdf:DefaultQuadStorage
 ;
 
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-PREFIX csv-stat: <http://demo.openlinksw.com:8890/csv/stat#> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX void: <http://rdfs.org/ns/void#> 
-PREFIX scovo: <http://purl.org/NET/scovo#> 
-PREFIX aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
-ALTER QUAD STORAGE virtrdf:DefaultQuadStorage 
- FROM "csv"."demo"."investments" as investments_s
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+prefix csv-stat: <http://demo.openlinksw.com/csv/stat#> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix void: <http://rdfs.org/ns/void#> 
+prefix scovo: <http://purl.org/NET/scovo#> 
+prefix aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
+alter quad storage virtrdf:DefaultQuadStorage 
+ from "csv"."demo"."investments" as investments_s
  { 
-   CREATE csv:qm-investments AS GRAPH iri ("http://^{URIQADefaultHost}^/csv#")  
+   create csv:qm-investments as graph iri ("http://^{URIQADefaultHost}^/csv#")  
     { 
-      # Maps FROM columns of "csv.demo.investments"
+      # Maps from columns of "csv.demo.investments"
       csv:investments (investments_s."id")  a csv:investments ;
       csv:companies investments_s."companies" as csv:demo-investments-companies ;
       csv:funded_date investments_s."funded_date" as csv:demo-investments-funded_date ;
@@ -149,20 +156,19 @@ ALTER QUAD STORAGE virtrdf:DefaultQuadStorage
 ;
 
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-PREFIX csv-stat: <http://demo.openlinksw.com:8890/csv/stat#> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX void: <http://rdfs.org/ns/void#> 
-PREFIX scovo: <http://purl.org/NET/scovo#> 
-PREFIX aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
-ALTER QUAD STORAGE virtrdf:DefaultQuadStorage 
- FROM "csv"."demo"."investors" as investors_s
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+prefix csv-stat: <http://demo.openlinksw.com/csv/stat#> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix void: <http://rdfs.org/ns/void#> 
+prefix scovo: <http://purl.org/NET/scovo#> 
+prefix aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
+alter quad storage virtrdf:DefaultQuadStorage 
+ from "csv"."demo"."investors" as investors_s
  { 
-   CREATE csv:qm-investors AS GRAPH iri ("http://^{URIQADefaultHost}^/csv#")  
+   create csv:qm-investors as graph iri ("http://^{URIQADefaultHost}^/csv#")  
     { 
-      # Maps FROM columns of "csv.demo.investors"
+      # Maps from columns of "csv.demo.investors"
       csv:investors (investors_s."id")  a csv:investors ;
-      csv:overview_id investors_s."overview_ID" as csv:demo-investors-overview_id ;
       csv:affiliation_name investors_s."affiliation_name" as csv:demo-investors-affiliation_name ;
       csv:alias_list investors_s."alias_list" as csv:demo-investors-alias_list ;
       csv:birthplace investors_s."birthplace" as csv:demo-investors-birthplace ;
@@ -191,7 +197,8 @@ ALTER QUAD STORAGE virtrdf:DefaultQuadStorage
       csv:twitter_username investors_s."twitter_username" as csv:demo-investors-twitter_username ;
       csv:updated_at investors_s."updated_at" as csv:demo-investors-updated_at ;
       csv:url investors_s."url" as csv:demo-investors-url ;
-      csv:web_presence investors_s."web_presence" as csv:demo-investors-web_presence .
+      csv:web_presence investors_s."web_presence" as csv:demo-investors-web_presence ;
+      csv:overview_id investors_s."overview_ID" as csv:demo-investors-overview_id .
 
     }
  }
@@ -199,24 +206,24 @@ ALTER QUAD STORAGE virtrdf:DefaultQuadStorage
 ;
 
 SPARQL
-PREFIX csv: <http://demo.openlinksw.com:8890/schemas/csv/> 
-PREFIX csv-stat: <http://demo.openlinksw.com:8890/csv/stat#> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX void: <http://rdfs.org/ns/void#> 
-PREFIX scovo: <http://purl.org/NET/scovo#> 
-PREFIX aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
-ALTER QUAD STORAGE virtrdf:DefaultQuadStorage 
- FROM "csv"."demo"."articlesCount" as articlescount_s
- FROM "csv"."demo"."companiesCount" as companiescount_s
- FROM "csv"."demo"."investmentsCount" as investmentscount_s
- FROM "csv"."demo"."investorsCount" as investorscount_s
- FROM "csv"."demo"."csv__Total" as csv__total_s
+prefix csv: <http://demo.openlinksw.com/schemas/csv/> 
+prefix csv-stat: <http://demo.openlinksw.com/csv/stat#> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix void: <http://rdfs.org/ns/void#> 
+prefix scovo: <http://purl.org/NET/scovo#> 
+prefix aowl: <http://bblfish.net/work/atom-owl/2006-06-06/> 
+alter quad storage virtrdf:DefaultQuadStorage 
+ from "csv"."demo"."articlesCount" as articlescount_s
+ from "csv"."demo"."companiesCount" as companiescount_s
+ from "csv"."demo"."investmentsCount" as investmentscount_s
+ from "csv"."demo"."investorsCount" as investorscount_s
+ from "csv"."demo"."csv__Total" as csv__total_s
  { 
-   CREATE csv:qm-VoidStatistics AS GRAPH iri ("http://^{URIQADefaultHost}^/csv#") option (exclusive) 
+   create csv:qm-VoidStatistics as graph iri ("http://^{URIQADefaultHost}^/csv#") option (exclusive) 
     { 
       # voID Statistics 
       csv-stat: a void:Dataset as csv:dataset-csv ; 
-       void:sparqlEndpoint <http://demo.openlinksw.com:8890/sparql> as csv:dataset-sparql-csv ; 
+       void:sparqlEndpoint <http://demo.openlinksw.com/sparql> as csv:dataset-sparql-csv ; 
       void:statItem csv-stat:Stat . 
       csv-stat:Stat a scovo:Item ; 
        rdf:value csv__total_s.cnt as csv:stat-decl-csv ; 
@@ -251,12 +258,9 @@ ALTER QUAD STORAGE virtrdf:DefaultQuadStorage
 ;
 
 
--- Re-sync Full Text Indexes
 
-DB.DBA.VT_INC_INDEX_DB_DBA_RDF_OBJ ();
-	
 -- Virtual directories for instance data
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_rule2',
 1,
 '(/[^#]*)',
@@ -269,7 +273,7 @@ null,
 2,
 null
 );
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_rule4',
 1,
 '/csv/stat([^#]*)',
@@ -282,7 +286,7 @@ null,
 2,
 null
 );
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_rule6',
 1,
 '/csv/objects/([^#]*)',
@@ -295,7 +299,7 @@ null,
 2,
 null
 );
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_rule1',
 1,
 '([^#]*)',
@@ -308,7 +312,7 @@ null,
 2,
 303
 );
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_rule7',
 1,
 '/csv/stat([^#]*)',
@@ -321,7 +325,7 @@ null,
 2,
 303
 );
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_rule5',
 1,
 '/csv/objects/(.*)',
@@ -334,14 +338,14 @@ null,
 2,
 null
 );
-DB.DBA.URLREWRITE_CREATE _RULELIST ( 'csv_rule_list1', 1, vector ( 'csv_rule1', 'csv_rule7', 'csv_rule5', 'csv_rule2', 'csv_rule4', 'csv_rule6'));
+DB.DBA.URLREWRITE_CREATE_RULELIST ( 'csv_rule_list1', 1, vector ( 'csv_rule1', 'csv_rule7', 'csv_rule5', 'csv_rule2', 'csv_rule4', 'csv_rule6'));
 DB.DBA.VHOST_REMOVE (lpath=>'/csv');
 DB.DBA.VHOST_DEFINE (lpath=>'/csv', ppath=>'/', vsp_user=>'dba', is_dav=>0,
 is_brws=>0, opts=>vector ('url_rewrite', 'csv_rule_list1')
 );
 
 -- Virtual directories for ontology
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_owl_rule2',
 1,
 '(/[^#]*)',
@@ -354,7 +358,7 @@ null,
 2,
 null
 );
-DB.DBA.URLREWRITE_CREATE _REGEX_RULE (
+DB.DBA.URLREWRITE_CREATE_REGEX_RULE (
 'csv_owl_rule1',
 1,
 '([^#]*)',
@@ -367,7 +371,7 @@ null,
 2,
 303
 );
-DB.DBA.URLREWRITE_CREATE _RULELIST ( 'csv_owl_rule_list1', 1, vector ( 'csv_owl_rule1', 'csv_owl_rule2'));
+DB.DBA.URLREWRITE_CREATE_RULELIST ( 'csv_owl_rule_list1', 1, vector ( 'csv_owl_rule1', 'csv_owl_rule2'));
 DB.DBA.VHOST_REMOVE (lpath=>'/schemas/csv');
 DB.DBA.VHOST_DEFINE (lpath=>'/schemas/csv', ppath=>'/', vsp_user=>'dba', is_dav=>0,
 is_brws=>0, opts=>vector ('url_rewrite', 'csv_owl_rule_list1')
