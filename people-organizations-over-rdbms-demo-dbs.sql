@@ -202,9 +202,9 @@ SELECT  (COUNT(*) AS ?count)
 FROM <urn:demo.openlinksw.com:OracleHR> 
 FROM <urn:demo.openlinksw.com:ingres> 
 FROM <urn:demo.openlinksw.com:informix> 
-FROM <urn:demo.openlinksw.com:Demo> 
+FROM <urn:demo.openlinksw.com:School> 
 FROM <urn:demo.openlinksw.com:SQLServer> 
-FROM <urn:demo.openlinksw.com:progress9> 
+FROM <urn:demo.openlinksw.com:progress11> 
 FROM <urn:demo.openlinksw.com:sybase12> 
 FROM <urn:demo.openlinksw.com:prestoDB> 
 WHERE {
@@ -222,9 +222,9 @@ SELECT  (COUNT(*) AS ?count)
 FROM <urn:demo.openlinksw.com:OracleHR> 
 FROM <urn:demo.openlinksw.com:ingres> 
 FROM <urn:demo.openlinksw.com:informix> 
-FROM <urn:demo.openlinksw.com:Demo> 
+FROM <urn:demo.openlinksw.com:School> 
+FROM <urn:demo.openlinksw.com:progress11>
 FROM <urn:demo.openlinksw.com:SQLServer> 
-FROM <urn:demo.openlinksw.com:progress9> 
 FROM <urn:demo.openlinksw.com:sybase12> 
 FROM <urn:demo.openlinksw.com:prestoDB> 
 WHERE {
@@ -242,9 +242,9 @@ SELECT  (COUNT(*) AS ?count)
 FROM <urn:demo.openlinksw.com:OracleHR> 
 FROM <urn:demo.openlinksw.com:ingres> 
 FROM <urn:demo.openlinksw.com:informix> 
-FROM <urn:demo.openlinksw.com:Demo> 
+FROM <urn:demo.openlinksw.com:progress11>
 FROM <urn:demo.openlinksw.com:SQLServer> 
-FROM <urn:demo.openlinksw.com:progress9> 
+FROM <urn:demo.openlinksw.com:School> 
 FROM <urn:demo.openlinksw.com:sybase12> 
 FROM <urn:demo.openlinksw.com:prestoDB> 
 WHERE {
@@ -262,9 +262,9 @@ SELECT  (COUNT(*) AS ?count)
 FROM <urn:demo.openlinksw.com:OracleHR> 
 FROM <urn:demo.openlinksw.com:ingres> 
 FROM <urn:demo.openlinksw.com:informix> 
-FROM <urn:demo.openlinksw.com:Demo> 
+FROM <urn:demo.openlinksw.com:progress11> 
 FROM <urn:demo.openlinksw.com:SQLServer> 
-FROM <urn:demo.openlinksw.com:progress9> 
+FROM  <urn:demo.openlinksw.com:School>  
 FROM <urn:demo.openlinksw.com:sybase12> 
 FROM <urn:demo.openlinksw.com:prestoDB> 
 WHERE {
