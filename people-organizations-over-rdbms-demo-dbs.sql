@@ -28,22 +28,38 @@ INSERT
             <http://demo.openlinksw.com/schemas/SQLServer/Customers>
                rdfs:subClassOf   foaf:Organization   .
 
-            ## Class derived from Sybase Publishers Table
+            ## Class derived from "sybase12."pubs2"."publishers" Table
             <http://demo.openlinksw.com/schemas/sybase12/publishers>
                rdfs:subClassOf   foaf:Organization   .
 
-            ## Class derived from Progress Customer Table
-            <http://demo.openlinksw.com/schemas/progress9/Customer>
+            ## Class derived from "progress11"."pub"."Customer" Table
+	    <http://demo.openlinksw.com/schemas/progress11/Customer>
                rdfs:subClassOf   foaf:Organization   .
+	       
+	    # Class derived from "progress11"."pub"."Supplier" Table   
+	     <http://demo.openlinksw.com/schemas/progress11/Supplier>
+	        rdfs:subClassOf   foaf:Organization   .
 
-            ## Class derived from PrestoDB Customer Table
+            ## Class derived from "PrestoDB"."hive"."customer" Table
             <http://demo.openlinksw.com/schemas/PrestoDB/customer>
                rdfs:subClassOf   foaf:Organization   .
+	    
+	    ## Class derived from "csv"."demo"."companies" Table
+	    <http://demo.openlinksw.com/schemas/csv/companies> 
+	        rdfs:subClassOf   foaf:Organization   .
 	       
             ### Person Class Instances (i.e. People) ###
 	    
-	    ## Class derived from Virtuoso's Employees Table
-            <http://demo.openlinksw.com/schemas/Demo/Employees>
+	    ## Class derived from "progress11"."pubs"."Employee" Table
+	    <http://demo.openlinksw.com/schemas/progress11/Employee>
+	       rdfs:subClassOf   foaf:Person   .
+	    
+	    # Class derived from "progress11"."pubs"."Salesrep" Table  
+	    <http://demo.openlinksw.com/schemas/progress11/Salesrep>
+	       rdfs:subClassOf   foaf:Person   .
+		
+	    ## Class derived from Virtuoso "School"."DBA"."Person" Table
+            <http://demo.openlinksw.com/schemas/School/Person>
 	       rdfs:subClassOf   foaf:Person   .
 	       
             ## Class derived from Informix Customer Table
