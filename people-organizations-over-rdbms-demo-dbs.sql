@@ -20,11 +20,11 @@ INSERT
          {
             ### Organization Class Instances (i.e. Organizations) ###
 	    
-	    ## Class derived from Virtuoso's Customers Table
+	    ## Class derived from "Demo"."demo"."Customers" Table
             <http://demo.openlinksw.com/schemas/Demo/Customers>
                rdfs:subClassOf   foaf:Organization   .
 
-            ## Class derived from Microsoft SQL Server Customers Table
+            ## Class derived from "sqlserver"."northwind"."Customers" Table
             <http://demo.openlinksw.com/schemas/SQLServer/Customers>
                rdfs:subClassOf   foaf:Organization   .
 
@@ -62,15 +62,15 @@ INSERT
             <http://demo.openlinksw.com/schemas/School/Person>
 	       rdfs:subClassOf   foaf:Person   .
 	       
-            ## Class derived from Informix Customer Table
+            ## Class derived from "informix"."stores"."customer" Table
             <http://demo.openlinksw.com/schemas/informix/customer>
                rdfs:subClassOf   foaf:Person   .
 
-            ## Class derived from Ingres Cust_Info Table
+            ## Class derived from "ingres"."tutorial"."cust_Info" Table
             <http://demo.openlinksw.com/schemas/ingres/cust_info>
                rdfs:subClassOf   foaf:Person   .
 
-            ## Class derived from Oracle EMPLOYEES Table
+            ## Class derived from "Oracle"."HR"."EMPLOYEES" Table
             <http://demo.openlinksw.com/schemas/OracleHR/EMPLOYEES>
                rdfs:subClassOf   foaf:Person   .
          }
@@ -272,5 +272,293 @@ WHERE {
       }  
 ;
 
+-- Test 5 Inference Enabled
 
-	
+SPARQL
+
+DEFINE input:inference 'sql-vdb-data-lake' 
+
+SELECT DISTINCT ?s as ?organization
+FROM NAMED <urn:demo.openlinksw.com:OracleHR> 
+FROM NAMED <urn:demo.openlinksw.com:ingres> 
+FROM NAMED <urn:demo.openlinksw.com:informix> 
+FROM NAMED <urn:demo.openlinksw.com:progress11>
+FROM NAMED <urn:demo.openlinksw.com:SQLServer> 
+FROM NAMED <urn:demo.openlinksw.com:School> 
+FROM NAMED <urn:demo.openlinksw.com:sybase12> 
+FROM NAMED <urn:demo.openlinksw.com:prestoDB> 
+FROM NAMED <urn:demo.openlinksw.com:csv> 
+WHERE {
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:OracleHR> {?s a foaf:Organization . } } LIMIT 1
+         } 
+		 
+		 UNION
+		 
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:ingres> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:informix> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:progress11> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:SQLServer> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:School> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:sybase12> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:prestoDB> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:csv> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+      }  
+;
+
+-- Test 6 Inference Disabled
+
+SPARQL
+
+# DEFINE input:inference 'sql-vdb-data-lake' 
+
+SELECT DISTINCT ?s as ?organization
+FROM NAMED <urn:demo.openlinksw.com:OracleHR> 
+FROM NAMED <urn:demo.openlinksw.com:ingres> 
+FROM NAMED <urn:demo.openlinksw.com:informix> 
+FROM NAMED <urn:demo.openlinksw.com:progress11>
+FROM NAMED <urn:demo.openlinksw.com:SQLServer> 
+FROM NAMED <urn:demo.openlinksw.com:School> 
+FROM NAMED <urn:demo.openlinksw.com:sybase12> 
+FROM NAMED <urn:demo.openlinksw.com:prestoDB> 
+FROM NAMED <urn:demo.openlinksw.com:csv> 
+WHERE {
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:OracleHR> {?s a foaf:Organization . } } LIMIT 1
+         } 
+		 
+		 UNION
+		 
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:ingres> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:informix> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:progress11> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:SQLServer> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:School> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:sybase12> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:prestoDB> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:csv> {?s a foaf:Organization . } } LIMIT 1
+        } 
+		
+      }  
+;
+	  
+-- Test 7 Inference Enabled
+
+SPARQL
+DEFINE input:inference 'sql-vdb-data-lake' 
+
+SELECT DISTINCT ?s 
+FROM NAMED <urn:demo.openlinksw.com:OracleHR> 
+FROM NAMED <urn:demo.openlinksw.com:ingres> 
+FROM NAMED <urn:demo.openlinksw.com:informix> 
+FROM NAMED <urn:demo.openlinksw.com:progress11>
+FROM NAMED <urn:demo.openlinksw.com:SQLServer> 
+FROM NAMED <urn:demo.openlinksw.com:School> 
+FROM NAMED <urn:demo.openlinksw.com:sybase12> 
+FROM NAMED <urn:demo.openlinksw.com:prestoDB> 
+FROM NAMED <urn:demo.openlinksw.com:csv> 
+WHERE {
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:OracleHR> {?s a foaf:Person .  } } LIMIT 1
+         } 
+		 
+		 UNION
+		 
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:ingres> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:informix> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:progress11> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:SQLServer> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:School> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:sybase12> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:prestoDB> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:csv> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+      }  
+;
+
+-- Test 8 Inference Disabled
+
+SPARQL
+
+DEFINE input:inference 'sql-vdb-data-lake' 
+
+SELECT DISTINCT ?s 
+FROM NAMED <urn:demo.openlinksw.com:OracleHR> 
+FROM NAMED <urn:demo.openlinksw.com:ingres> 
+FROM NAMED <urn:demo.openlinksw.com:informix> 
+FROM NAMED <urn:demo.openlinksw.com:progress11>
+FROM NAMED <urn:demo.openlinksw.com:SQLServer> 
+FROM NAMED <urn:demo.openlinksw.com:School> 
+FROM NAMED <urn:demo.openlinksw.com:sybase12> 
+FROM NAMED <urn:demo.openlinksw.com:prestoDB> 
+FROM NAMED <urn:demo.openlinksw.com:csv> 
+WHERE {
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:OracleHR> {?s a foaf:Person .  } } LIMIT 1
+         } 
+		 
+		 UNION
+		 
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:ingres> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:informix> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:progress11> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:SQLServer> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:School> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:sybase12> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:prestoDB> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+		UNION
+		
+        { 
+         SELECT DISTINCT ?s { GRAPH <urn:demo.openlinksw.com:csv> {?s a foaf:Person .  } } LIMIT 1
+        } 
+		
+      }  
+;
