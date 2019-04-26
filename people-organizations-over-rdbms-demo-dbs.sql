@@ -49,6 +49,10 @@ INSERT
 	    ## Class derived from "csv"."demo"."companies" Table
 	    <http://demo.openlinksw.com/schemas/csv/companies> 
 	        rdfs:subClassOf   foaf:Organization   .
+	    
+	    ## Class derived from "SQLSerever"."Northwind"."Customers" Table
+	    <http://demo.openlinksw.com/schemas/SQLServer/Customers>
+	        rdfs:subClassOf   foaf:Organization   .
 	       
             ### Person Class Instances (i.e. People) ###
 	    
@@ -74,6 +78,10 @@ INSERT
 
             ## Class derived from "Oracle"."HR"."EMPLOYEES" Table
             <http://demo.openlinksw.com/schemas/OracleHR/EMPLOYEES>
+               rdfs:subClassOf   foaf:Person   .
+	       
+	    ## Class derived from "SQLServer"."Northwind"."EMPLOYEES" Table
+            <http://demo.openlinksw.com/schemas/SQLServer/Employees>
                rdfs:subClassOf   foaf:Person   .
          }
    } ;
