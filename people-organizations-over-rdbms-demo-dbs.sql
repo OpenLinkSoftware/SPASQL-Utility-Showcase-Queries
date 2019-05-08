@@ -11,6 +11,7 @@ WHERE RS_NAME = 'sql-vdb-data-lake';
 SPARQL 
 CLEAR GRAPH <urn:rdbms:inference:reasoning:demo:1> ;
 
+SPARQL
 CLEAR GRAPH <urn:rdbms:inference:reasoning:demo:labels> ;
 
 -- Add rdfs:subClassOf relations to a Named Graph (Document)
