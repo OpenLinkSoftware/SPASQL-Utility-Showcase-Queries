@@ -1,3 +1,12 @@
+-- Download the Northwind Database as a collection of CSV Documents from
+-- http://bitnine.net/tutorial/import-northwind-dataset.zip
+-- Goto to your /tmp directory and then execute
+-- curl -O http://bitnine.net/tutorial/import-northwind-dataset.zip ;
+-- unzip import-northwind-dataset.zip 
+-- then cd to import-northwind-dataset folder
+-- and execute: cp *.csv ~virtuoso/vad  
+-- then run the rest of this script, verbatim
+
 -- ATTACH CATEGORIES TABLE
 
 DROP TABLE csv.northwind.categories;
