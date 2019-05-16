@@ -6,6 +6,21 @@
 -- then cd to import-northwind-dataset folder
 -- and execute: cp *.csv ~virtuoso/vad  
 -- then run the rest of this script, verbatim
+-- The following should exist at the end of the process, based on our demo database instance
+
+-- Transient Views: http://demo.openlinksw.com/csv_northwind#
+-- http://demo.openlinksw.com/csv_northwind/categories/categoryID/1#this
+-- http://demo.openlinksw.com/csv_northwind/objects/categories/categoryID/1/picture.jpe
+-- http://demo.openlinksw.com/csv_northwind/customers/customerID/ALFKI#this
+-- http://demo.openlinksw.com/csv_northwind/employee_territories/employeeID/1#this
+-- http://demo.openlinksw.com/csv_northwind/employees/employeeID/1#this
+-- http://demo.openlinksw.com/csv_northwind/order_details/orderID/10248#this
+-- http://demo.openlinksw.com/csv_northwind/orders/orderID/10248#this
+-- http://demo.openlinksw.com/csv_northwind/products/productID/1#this
+-- http://demo.openlinksw.com/csv_northwind/regions/regionID/1#this
+-- http://demo.openlinksw.com/csv_northwind/shippers/shipperID/1#this
+-- Metadata Data Document (VoiD) URI/URL: http://demo.openlinksw.com/csv_northwind/stat#
+-- Linked Data Ontology URI: http://demo.openlinksw.com/schemas/csv_northwind/
 
 -- ATTACH CATEGORIES TABLE
 
