@@ -52,8 +52,8 @@ SELECT TOP 5 * FROM csv.northwind.employees;
 --ATTACH ORDER DETAILS TABLE
 
 DROP TABLE csv.northwind.order_details;
-ATTACH_FROM_CSV ('csv.northwind.order_details', 'file:../vad/order_details.csv', ',', '\n', null, 1, vector(1));
-SELECT TOP 5 * FROM csv.northwind.order_details;
+ATTACH_FROM_CSV ('csv.northwind.orders_details', 'file:../vad/orders_details.csv', ',', '\n', null, 1, vector(1));
+SELECT TOP 5 * FROM csv.northwind.orders_details;
 
 
 --ATTACH ORDERS TABLE
