@@ -1,7 +1,26 @@
+-- Cleanup
+
 SPARQL CLEAR GRAPH <urn:equivalent:class:property:mappings> ;
+
+
+SPARQL CLEAR GRAPH <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/windows/Upgrade83GuideWindows.ttl> ;
+
+SPARQL CLEAR GRAPH <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/macos/Upgrade83GuideMacOSX.ttl> ;
 
 DELETE FROM DB.DBA.SYS_RDF_SCHEMA 
 WHERE RS_NAME = 'urn:owl:equivalent:class:property:inference:rules' ; 
+
+-- Load Data
+
+SPARQL 
+
+DEFINE get:soft "no-sponge"
+LOAD <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/windows/Upgrade83GuideWindows.ttl> ;
+
+SPARQL
+
+DEFINE get:soft "no-sponge"
+LOAD <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/macos/Upgrade83GuideMacOSX.ttl> ;
 
 
 SPARQL
@@ -17,15 +36,15 @@ PREFIX : <#>
 INSERT DATA {
 				GRAPH <urn:equivalent:class:property:mappings> 
 				{
-					foaf:Organization owl:equivalentClass schema:Organization .
-					foaf:Person owl:equivalentClass schema:Person .
-					foaf:Person owl:equivalentClass fibo:person .
+
 					schema:HowToStep owl:equivalentClass opl:StepByGuide . 
-					schema:step owl:equivalentProperty opl:hasStep . 
-					schema:position owl:equivalentProperty opl:hasIndex . 
-					schema:nextItem owl:equivalentProperty opl:hasNext .
-					schema:previousItem owl:equivalentProperty opl:hasPrevious .
+					opl:hasStepByGuide rdfs:subPropertyOf schema:step . 
+					opl:hasIndex rdfs:subPropertyOf schema:position . 
+					opl:hasNext rdfs:subPropertyOf schema:nextItem.
+					opl:hasPrevious rdfs:subPropertyOf schema:previousItem .
+
 					owl:equivalentProperty a owl:TransitiveProperty . 
+					owl:equivalentClass a owl:TransitiveProperty . 
 				}
 };
 
@@ -63,7 +82,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
 
 
-SELECT DISTINCT count(*)
+SELECT COUNT (DISTINCT *)
 WHERE {
 		?s a schema:HowToStep .
 
@@ -103,7 +122,7 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX schema: <http://schema.org/> 
 PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
 
-SELECT DISTINCT count(*)
+SELECT COUNT (DISTINCT *)
 WHERE {
 	?s a schema:HowToStep .
 
@@ -127,7 +146,7 @@ PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 SELECT DISTINCT ?s  ?o
 WHERE { 
 		?s a schema:HowToStep ;
-             schema:Step ?o
+             schema:position ?o
   } ;
 
 
@@ -149,7 +168,7 @@ PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 SELECT DISTINCT ?s  ?o
 WHERE { 
 		?s a schema:HowToStep ;
-           schema:Step ?o
-} ;
+             schema:position ?o
+  } ;
 				
 
