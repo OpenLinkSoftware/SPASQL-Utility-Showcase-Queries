@@ -122,7 +122,22 @@ WHERE {
 
 SPARQL
 
-	 ;
+DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bmo: <http://purl.org/bmo/ns#> 
+PREFIX fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/> 
+PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
+
+
+SELECT DISTINCT ?s  ?o
+WHERE { 
+		?s a schema:HowToStep ;
+        schema:position ?o
+	  } ;
 
 
 -- Test 2.1
