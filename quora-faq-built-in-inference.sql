@@ -2,7 +2,7 @@
 
 SPARQL CLEAR GRAPH <urn:inference:oplfaq>;
 
-SPARQL CLEAR GRAPH <https://github.com/danielhmills/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>;
+SPARQL CLEAR GRAPH <https://github.com/OpenLinkSoftware/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>;
 
 DELETE
 FROM DB.DBA.SYS_RDF_SCHEMA 
@@ -10,7 +10,7 @@ WHERE RS_NAME = 'urn:inference:oplfaq:rule' ;
 
 --Load FAQ .TTL
 
-SPARQL LOAD <https://github.com/danielhmills/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>;
+SPARQL LOAD <https://github.com/OpenLinkSoftware/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>;
 
 --Load Rules
 
@@ -26,6 +26,7 @@ oplfaq:answer rdfs:subPropertyOf schema:acceptedAnswer.
 oplfaq:hasQuestionText rdfs:subPropertyOf schema:text.
 oplfaq:hasAnswerText rdfs:subPropertyOf schema:text.   
 };
+
 
 --Confirm addition of rules
 
@@ -57,7 +58,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX oplfaq: <http://www.openlinksw.com/ontology/faq#>
 
 SELECT *
-FROM <https://github.com/danielhmills/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>
+FROM <https://github.com/OpenLinkSoftware/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>
 WHERE
         {
             ?s a schema:Question;
@@ -72,7 +73,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX oplfaq: <http://www.openlinksw.com/ontology/faq#>
 
 SELECT *
-FROM <https://github.com/danielhmills/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>
+FROM <https://github.com/OpenLinkSoftware/Turtle-Based-FAQ-Documents/raw/master/quora-faqs.ttl>
 WHERE
         {
             ?s a schema:Question;
