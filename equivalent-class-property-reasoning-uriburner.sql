@@ -2,173 +2,157 @@
 
 SPARQL CLEAR GRAPH <urn:equivalent:class:property:mappings> ;
 
-
 SPARQL CLEAR GRAPH <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/windows/Upgrade83GuideWindows.ttl> ;
 
 SPARQL CLEAR GRAPH <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/macos/Upgrade83GuideMacOSX.ttl> ;
 
-DELETE FROM DB.DBA.SYS_RDF_SCHEMA 
-WHERE RS_NAME = 'urn:owl:equivalent:class:property:inference:rules' ; 
+DELETE FROM DB.DBA.SYS_RDF_SCHEMA
+WHERE RS_NAME = 'urn:owl:equivalent:class:property:inference:rules' ;
 
 -- Load Data
 
-SPARQL 
-
+SPARQL
 DEFINE get:soft "no-sponge"
 LOAD <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/windows/Upgrade83GuideWindows.ttl> ;
 
 SPARQL
-
 DEFINE get:soft "no-sponge"
 LOAD <https://github.com/OpenLinkSoftware/Documentation/raw/master/rdf-turtle-based-documentation/virtuoso/macos/Upgrade83GuideMacOSX.ttl> ;
 
-
 SPARQL
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bmo: <http://purl.org/bmo/ns#> 
-PREFIX fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <http://schema.org/> 
-PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
-PREFIX : <#>
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
+PREFIX       : <#>
 
-INSERT DATA {
-				GRAPH <urn:equivalent:class:property:mappings> 
-				{
-
-					schema:HowToStep owl:equivalentClass opl:StepByGuide . 
-					opl:hasStepByGuide rdfs:subPropertyOf schema:step . 
-					opl:hasIndex rdfs:subPropertyOf schema:position . 
-					opl:hasNext rdfs:subPropertyOf schema:nextItem.
-					opl:hasPrevious rdfs:subPropertyOf schema:previousItem .
-
-					owl:equivalentProperty a owl:TransitiveProperty . 
-					owl:equivalentClass a owl:TransitiveProperty . 
-				}
-};
+INSERT DATA
+  {
+    GRAPH <urn:equivalent:class:property:mappings>
+      {
+        schema:HowToStep       owl:equivalentClass opl:StepByGuide .
+        opl:hasStepByGuide     rdfs:subPropertyOf  schema:step .
+        opl:hasIndex           rdfs:subPropertyOf  schema:position .
+        opl:hasNext            rdfs:subPropertyOf  schema:nextItem .
+        opl:hasPrevious        rdfs:subPropertyOf  schema:previousItem .
+        owl:equivalentProperty a                   owl:TransitiveProperty .
+        owl:equivalentClass    a                   owl:TransitiveProperty .
+      }
+  } ;
 
 SPARQL ADD <http://www.productontology.org/dump.rdf> TO <urn:equivalent:class:property:mappings> ;
-SPARQL ADD <kbpedia_reference_concepts_linkage_inferrence_extended.n3> TO <urn:equivalent:class:property:mappings> ; 
-SPARQL ADD <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> TO <urn:equivalent:class:property:mappings> ; 
+SPARQL ADD <kbpedia_reference_concepts_linkage_inferrence_extended.n3> TO <urn:equivalent:class:property:mappings> ;
+SPARQL ADD <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> TO <urn:equivalent:class:property:mappings> ;
 SPARQL ADD <http://kbpedia.org/knowledge-graph#> TO <urn:equivalent:class:property:mappings> ;
 
-
-SPARQL 
-
-SELECT COUNT(*) 
+SPARQL
+SELECT ( COUNT ( * ) AS ?count )
 FROM <urn:equivalent:class:property:mappings>
-WHERE {?s ?p ?o} ;
+WHERE { ?s ?p ?o } ;
 
-RDFS_RULE_SET ('urn:owl:equivalent:class:property:inference:rules', 'urn:equivalent:class:property:mappings') ;
+RDFS_RULE_SET ( 'urn:owl:equivalent:class:property:inference:rules', 'urn:equivalent:class:property:mappings' ) ;
 
-SELECT * 
-FROM DB.DBA.SYS_RDF_SCHEMA 
-WHERE RS_NAME = 'urn:owl:equivalent:class:property:inference:rules' ; 
+SELECT *
+FROM DB.DBA.SYS_RDF_SCHEMA
+WHERE RS_NAME = 'urn:owl:equivalent:class:property:inference:rules' ;
 
-
--- Test Query 1 
+-- Test Query 1
 
 SPARQL
-
 DEFINE input:inference 'urn:owl:equivalent:class:property:inference:rules'
 
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bmo: <http://purl.org/bmo/ns#> 
-PREFIX fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <http://schema.org/> 
-PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
-
-SELECT COUNT (DISTINCT *)
-WHERE {
-		?s a schema:HowToStep .
-
-      } ;
+SELECT ( COUNT ( DISTINCT * ) AS ?count )
+WHERE
+  {
+    ?s a schema:HowToStep .
+  } ;
 
 -- Test Query 1.1
 
 SPARQL
-
 DEFINE input:inference 'urn:owl:equivalent:class:property:inference:rules'
 
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bmo: <http://purl.org/bmo/ns#> 
-PREFIX fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <http://schema.org/> 
-PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
-
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
 SELECT DISTINCT ?s
-WHERE { 
-		?s a schema:HowToStep .
-	  } ;
-	  
+WHERE
+  {
+    ?s a schema:HowToStep .
+  } ;
+
 -- Test Query 1.2 Rules Disabled
 
 SPARQL
-
 # DEFINE input:inference 'urn:owl:equivalent:class:property:inference:rules'
 
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bmo: <http://purl.org/bmo/ns#> 
-PREFIX fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <http://schema.org/> 
-PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
-SELECT COUNT (DISTINCT *)
-WHERE {
-	?s a schema:HowToStep .
+SELECT ( COUNT ( DISTINCT * ) AS ?count )
+WHERE
+  {
+    ?s a schema:HowToStep .
+  } ;
 
-    } ;
-			
 -- Test 2
-	  
-SPARQL
 
+SPARQL
 DEFINE input:inference 'urn:owl:equivalent:class:property:inference:rules'
 
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bmo: <http://purl.org/bmo/ns#> 
-PREFIX fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <http://schema.org/> 
-PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
-
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
 SELECT DISTINCT ?s  ?o
-WHERE { 
-		?s a schema:HowToStep ;
-             schema:position ?o
+WHERE
+  {
+    ?s a               schema:HowToStep ;
+       schema:position ?o
   } ;
-
 
 -- Test 2.1
-  
-SPARQL
 
+SPARQL
 # DEFINE input:inference 'urn:owl:equivalent:class:property:inference:rules'
 
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bmo: <http://purl.org/bmo/ns#> 
-PREFIX fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <http://schema.org/> 
-PREFIX opl: <http://www.openlinksw.com/ontology/stepbyguide#> 
-
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
 SELECT DISTINCT ?s  ?o
-WHERE { 
-		?s a schema:HowToStep ;
-             schema:position ?o
+WHERE 
+  {
+    ?s a               schema:HowToStep ;
+       schema:position ?o
   } ;
-				
-
+                
