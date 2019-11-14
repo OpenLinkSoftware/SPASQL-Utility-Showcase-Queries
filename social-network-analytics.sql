@@ -34,14 +34,14 @@ SELECT ?s ( COUNT(*) AS ?count )
 FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/Tutorials/label-property-graph-stuff/foaf-network-analysis.ttl>
 WHERE{ ?s  foaf:knows  ?o } 
 GROUP BY ?s 
-ORDER BY ( ?count ) ;
+ORDER BY DESC ( ?count ) ;
 
 -- Example 3: Degree of Centrality
 
 SPARQL
 
 SELECT ?via count(*) AS ?cnt
-FROM <urn:analytics>
+FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/Tutorials/label-property-graph-stuff/foaf-network-analysis.ttl>
 WHERE
 {
   ?s foaf:knows ?o 
@@ -51,9 +51,10 @@ WHERE
   ?via foaf:knows ?s
   OPTION ( TRANSITIVE, T_DISTINCT, T_IN (?via) , T_OUT (?s) , T_MIN (1) , T_MAX (100) , T_STEP ('step_no') AS ?dist_FROM_via ) .    
   FILTER( ?s = <https://emekaokoye.solid.community/profile/card#me>)
-  #FILTER( ?via = <urn:m> )
   FILTER( ?dist = (?dist_to_via + ?dist_FROM_via) )   
-} GROUP BY ?via ORDER BY (?cnt) ;
+} 
+GROUP BY ?via 
+ORDER BY DESC (?cnt) ;
 
 -- Example 4: Closeness Centrality
 
@@ -70,9 +71,27 @@ WHERE
              T_OUT (?o) , 
              T_MIN (1) , 
              T_STEP ('step_no') AS ?dist ) .
-    FILTER( ?s = <http://myopenlink.net/datASpace/person/kidehen#this> )
-    # FILTER( ?s = <https://teodora.solid.community/profile/card#me> )
+    FILTER( ?s = <https://teodora.solid.community/profile/card#me> )
   } ;
+
+-- Example 4.a: Closeness Centrality using shortest path
+
+SPARQL
+
+SELECT ( SUM(?dist) AS ?sum )
+FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/Tutorials/label-property-graph-stuff/foaf-network-analysis.ttl>
+WHERE
+{
+  ?s  foaf:knows  ?o
+  OPTION ( TRANSITIVE , T_DISTINCT , T_SHORTEST_ONLY,
+           T_IN (?s) ,
+           T_OUT (?o) ,
+           T_MIN (1) ,
+           T_STEP ('step_no') AS ?dist 
+          ) .
+FILTER (?s = <https://teodora.solid.community/profile/card#me>)
+FILTER (?o = <https://www.w3.org/People/Berners-Lee/card#i>)
+} ;
 
 --Example 5: Betweeness Centrality
 
@@ -88,10 +107,11 @@ WHERE
   OPTION ( TRANSITIVE, T_DISTINCT, T_IN (?o) , T_OUT (?via) , T_MIN (1) , T_MAX (100) , T_STEP ('step_no') AS ?dist_to_via ) .     
   ?via foaf:knows ?s
   OPTION ( TRANSITIVE, T_DISTINCT, T_IN (?via) , T_OUT (?s) , T_MIN (1) , T_MAX (100) , T_STEP ('step_no') AS ?dist_from_via ) .    
-  FILTER( ?s = <http://myopenlink.net/datASpace/person/kidehen#this> )
-  # FILTER( ?s = <https://www.w3.org/People/Berners-Lee/card#i> )
+  FILTER( ?s = <https://www.w3.org/People/Berners-Lee/card#i> )
   FILTER( ?dist = (?dist_to_via + ?dist_from_via) )   
-} GROUP BY ?via ORDER BY (?cnt)  ;
+} 
+GROUP BY ?via 
+ORDER BY DESC (?cnt)  ;
 
 -- Example 6 (EVC): Betweeness Centrality via Shortest Path 
 
@@ -118,7 +138,7 @@ WHERE
 } 
 GROUP BY ?via ORDER BY DESC (?cnt) ;
 
--- Example 7 (EVC): Importance Centrality via Shortest Path using T_MAX()
+-- Example 7 (EVC): Importance Centrality via Shortest Path Out using T_MAX()
 
 SPARQL
 
