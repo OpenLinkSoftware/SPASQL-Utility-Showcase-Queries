@@ -1,10 +1,12 @@
--- Example 1
+-- Example 1 LinkedIn 
+
 SPARQL
 
 SELECT ?s AS ?knows 
        ?knowee
        ?dist AS ?knoweeDistance 
-       ( ( SELECT COUNT ( * ) WHERE{ ?s foaf:knows ?xx } ) ) AS ?knowsNetworkSize        
+       ( ( SELECT COUNT ( * ) WHERE{ ?s foaf:knows ?xx } ) ) AS ?knowsNetworkSize    
+FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/Tutorials/label-property-graph-stuff/foaf-network-analysis.ttl>    
 WHERE
   {
     {
@@ -19,12 +21,44 @@ WHERE
             T_MIN ( 1 ) , T_MAX ( 4 ), 
             T_STEP ( 'step_no' ) AS ?dist 
            ) .   # FILTER( ?o = <http://elidam.org/resource/Giuseppe_La_Barbera/> )
-   BIND ( <http://myopenlink.net/datASpace/person/kidehen#this> AS ?knowee )
-   FILTER(?o = <http://myopenlink.net/datASpace/person/kidehen#this> )
+   BIND ( <http://myopenlink.net/dataspace/person/kidehen#this> AS ?knowee )
+   FILTER(?o = <http://myopenlink.net/dataspace/person/kidehen#this> )
    # FILTER(! CONTAINS(STR(?s),"Idehen"))
    # FILTER(! CONTAINS(STR(?s),"idehen"))
   }
 ORDER BY 4 ?dist  ;
+
+-- Example 1.a  LinkedIn 
+
+SELECT ?s AS ?knower 
+       ?knowee
+       ?dist AS ?knoweeDistance 
+       ( ( SELECT COUNT ( * ) WHERE{ ?s foaf:knows ?xx } ) ) AS ?knowerNetworkSize    
+FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/Tutorials/label-property-graph-stuff/foaf-network-analysis.ttl>
+FROM <https://id.myopenlink.net/DAV/home/KingsleyUyiIdehen/Public/kingsley.ttl>
+FROM <urn:social:network:demo:data>
+WHERE
+  {
+    {
+      SELECT ?s ?o WHERE
+      {
+        ?s foaf:knows ?o
+      }
+     }
+   ## Degrees of Separation via TRANSITIVE Option ##
+   OPTION ( TRANSITIVE, T_DISTINCT, 
+            T_IN ( ?s ) , T_OUT ( ?o ), 
+            T_MIN ( 1 ) , T_MAX ( 4 ), 
+            T_STEP ( 'step_no' ) AS ?dist 
+           ) .   # FILTER( ?o = <http://elidam.org/resource/Giuseppe_La_Barbera/> )
+   BIND ( <https://deiu.me/profile#me> AS ?knowee )
+   # FILTER(?o = <http://myopenlink.net/dataspace/person/kidehen#this> )
+    FILTER (?o = <https://deiu.me/profile#me> )
+   # FILTER(! CONTAINS(STR(?s),"Idehen"))
+   # FILTER(! CONTAINS(STR(?s),"idehen"))
+  }
+ORDER BY ASC 3 DESC 4 ;
+
 
 -- Example 2:  Centrality
 
@@ -50,7 +84,7 @@ WHERE
   OPTION ( TRANSITIVE, T_DISTINCT, T_IN (?o) , T_OUT (?via) , T_MIN (1) , T_MAX (100) , T_STEP ('step_no') AS ?dist_to_via ) .     
   ?via foaf:knows ?s
   OPTION ( TRANSITIVE, T_DISTINCT, T_IN (?via) , T_OUT (?s) , T_MIN (1) , T_MAX (100) , T_STEP ('step_no') AS ?dist_FROM_via ) .    
-  FILTER( ?s = <https://emekaokoye.solid.community/profile/card#me>)
+  FILTER( ?s = <http://myopenlink.net/dataspace/person/kidehen#this> )
   FILTER( ?dist = (?dist_to_via + ?dist_FROM_via) )   
 } 
 GROUP BY ?via 
@@ -60,38 +94,39 @@ ORDER BY DESC (?cnt) ;
 
 SPARQL
 
-SELECT ( SUM(?dist) AS ?sum )
+SELECT ?s ?o ( SUM(?dist) AS ?sum )
 FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/Tutorials/label-property-graph-stuff/foaf-network-analysis.ttl>
 WHERE
   { 
     ?s  foaf:knows  ?o
-    OPTION ( TRANSITIVE , 
-             T_DISTINCT , 
-             T_IN (?s) , 
-             T_OUT (?o) , 
-             T_MIN (1) , 
-             T_STEP ('step_no') AS ?dist ) .
+    OPTION ( 
+             TRANSITIVE , T_DISTINCT , 
+             T_IN (?s) , T_OUT (?o) , 
+             T_MIN (1) , T_STEP ('step_no') AS ?dist ) .
     FILTER( ?s = <https://teodora.solid.community/profile/card#me> )
-  } ;
+    FILTER ( ?o = <https://www.w3.org/People/Berners-Lee/card#i> )
+  } 
+GROUP BY ?s ?o ;
 
 -- Example 4.a: Closeness Centrality using shortest path
 
 SPARQL
 
-SELECT ( SUM(?dist) AS ?sum )
+SELECT ?s ?o ( SUM(?dist) AS ?sum )
 FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/Tutorials/label-property-graph-stuff/foaf-network-analysis.ttl>
 WHERE
 {
   ?s  foaf:knows  ?o
-  OPTION ( TRANSITIVE , T_DISTINCT , T_SHORTEST_ONLY,
-           T_IN (?s) ,
-           T_OUT (?o) ,
-           T_MIN (1) ,
-           T_STEP ('step_no') AS ?dist 
+  OPTION ( 
+           TRANSITIVE , T_DISTINCT , T_SHORTEST_ONLY,
+           T_IN (?s) , T_OUT (?o) ,
+           T_MIN (1) , T_STEP ('step_no') AS ?dist 
           ) .
 FILTER (?s = <https://teodora.solid.community/profile/card#me>)
 FILTER (?o = <https://www.w3.org/People/Berners-Lee/card#i>)
-} ;
+} 
+GROUP BY ?s ?o ;
+
 
 --Example 5: Betweeness Centrality
 
