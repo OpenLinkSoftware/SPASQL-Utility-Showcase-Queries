@@ -99,6 +99,7 @@ WHERE
 GROUP BY ?s ?o ;
 
 -- Betweeness Centrality
+SPARQL
 
 SELECT ?via 
        ( count(*) AS ?cnt )
