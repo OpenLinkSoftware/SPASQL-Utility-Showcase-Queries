@@ -1,34 +1,3 @@
--- FOAF Social Network for Graph Analytics
--- using RDF representation Relations via SPARQL-BI
-
-SPARQL
-
-CLEAR GRAPH <urn:analytics> ;
-
-SPARQL
-
-PREFIX foaf:	<http://xmlns.com/foaf/0.1/> 
-
-INSERT { 
-         GRAPH <urn:analytics> 
-            {
-                <urn:a> foaf:knows	<urn:b> , <urn:c> , <urn:d> , <urn:e> , <urn:f> , <urn:m> , <urn:g> .
-                <urn:b> foaf:knows	<urn:a> , <urn:c> .
-                <urn:c> foaf:knows	<urn:a> , <urn:b> , <urn:i> , <urn:l> .
-                <urn:d> foaf:knows	<urn:a> , <urn:k> .
-                <urn:e> foaf:knows	<urn:a> , <urn:m> .
-                <urn:f> foaf:knows	<urn:a> , <urn:i> .
-                <urn:m> foaf:knows	<urn:a> , <urn:e> , <urn:g> .
-                <urn:g> foaf:knows	<urn:a> , <urn:m> , <urn:k> , <urn:h> , <urn:j> .
-                <urn:i> foaf:knows	<urn:c> , <urn:f> .
-                <urn:l> foaf:knows	<urn:c> .
-                <urn:k> foaf:knows	<urn:d> , <urn:g> .
-                <urn:h> foaf:knows	<urn:g> .
-                <urn:j> foaf:knows	<urn:g> .
-           }
-       } ;
-
-
 -- SQL rendition of Social Network Relations for Graph Analytics using SQL-Transitivity extension
 
 DROP TABLE demo..knows ;
@@ -97,32 +66,63 @@ INSERT INTO demo..knows VALUES ('h', 'g');
 -- <urn:j> foaf:knows	<urn:g> .
 INSERT INTO demo..knows VALUES ('j', 'g');
 
--- Transitive SQL Query Tests
+-- Test Queries --
 
--- <urn:a> connections
+-- Test Queries --
 
-SELECT * 
-FROM ( SELECT TRANSITIVE T_IN (1) T_OUT (2) T_DISTINCT subject, object 
-       FROM demo..knows ) AS k 
-WHERE k.subject = 'a';
+-- Graph Analytics SQL Replicas --
 
--- <urn:a> to <urn:i> 
-SELECT subject, object, via, path, step
-FROM ( SELECT TRANSITIVE T_IN (1) T_OUT (2) T_DIRECTION 3 T_DISTINCT T_SHORTEST_ONLY subject , 
-            object , 
-            T_STEP (1) AS via , 
-            T_STEP ('path_id') AS path , 
-            T_STEP ('step_no') AS step 
-       FROM demo..knows ) AS k 
-WHERE subject = 'a' 
-AND object = 'i' ;
+-- Centrality 
 
--- 
-SELECT * 
-FROM ( SELECT TRANSITIVE T_IN (1) T_OUT (2) T_MIN (0) T_DISTINCT subject , 
-                         object , 
-                         T_STEP (1) AS via , 
-                         T_STEP ('path_id') AS path , 
-                         T_STEP ('step_no') AS step 
-       FROM demo..knows ) k 
-WHERE subject = 'a' ;
+SELECT subject, count(*) 
+FROM demo..knows 
+GROUP BY subject ORDER BY 2 DESC ;
+
+-- Degree Centrality
+
+SELECT count(*)  
+FROM ( 
+        SELECT TRANSITIVE T_DISTINCT 
+              T_IN (1) T_OUT (2) T_MIN (1) 
+              subject , 
+              object 
+        FROM demo..knows 
+     ) AS k  
+WHERE k.subject = 'a' ;
+
+-- Closeness Centrality 
+
+SELECT sum(step)  
+FROM ( 
+        SELECT TRANSITIVE T_DISTINCT 
+               T_IN (1) T_OUT (2) T_MIN (1)  
+               subject, 
+               object , 
+               T_STEP ('step_no') AS step 
+        FROM demo..knows 
+     ) AS k 
+WHERE k.subject = 'a' ;
+
+-- Betweeness Centrality 
+
+SELECT A.object AS via, COUNT (  1) AS cnt
+FROM (
+        SELECT TRANSITIVE T_DISTINCT  T_MIN(1) 
+               T_OUT(2) T_IN(1)
+               subject,
+               object, 
+               T_STEP( 'step_no' ) AS dist_to_via
+          FROM demo..knows
+      ) AS A
+INNER JOIN (
+              SELECT  TRANSITIVE T_DISTINCT T_SHORTEST_ONLY T_MIN(1)
+                      T_OUT(2) T_IN(1)  
+                      subject,
+                      object, 
+                      T_STEP( 'step_no' ) AS dist_from_via
+              FROM demo..knows
+            ) AS B
+ON (A.object = B.subject)
+WHERE A.subject =  'a'
+GROUP BY A.object
+ORDER BY 2 DESC   ;
