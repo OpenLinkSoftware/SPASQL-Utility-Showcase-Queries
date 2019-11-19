@@ -8,7 +8,6 @@ SPARQL CLEAR GRAPH <urn:opl:shop:offering:sponging:cache:official> ;
 SPARQL define get:soft "no-sponge" LOAD <http://www.openlinksw.com/data/turtle/licenses.ttl> INTO <urn:opl:shop:offering:sponging:cache:official> ;
 SPARQL define get:soft "no-sponge" LOAD <http://www.openlinksw.com/data/turtle/products.ttl> INTO <urn:opl:shop:offering:sponging:cache:official> ;
 SPARQL define get:soft "no-sponge" LOAD <http://www.openlinksw.com/data/turtle/software.ttl> INTO <urn:opl:shop:offering:sponging:cache:official> ;
-SPARQL define get:soft "no-sponge" LOAD <http://www.openlinksw.com/ontology/products> INTO <urn:opl:shop:offering:sponging:cache:official> ;
 
 -- Generic Glossaries -- 
 
