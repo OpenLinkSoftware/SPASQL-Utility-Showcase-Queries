@@ -137,7 +137,7 @@ ORDER BY DESC (?cnt) ;
 
 SPARQL 
 SELECT ?via 
-       ( count(*) AS ?cnt )
+       count(*) AS ?cnt 
 FROM <urn:analytics>
 WHERE
 {
@@ -216,6 +216,7 @@ INSERT
 } ;
 
 -- Eigen Vector Centrality (EVC) 
+-- via rnk_scale
 
 SPARQL 
 
@@ -223,5 +224,29 @@ SELECT ?s
        sql:rnk_scale ((<LONG::IRI_RANK> (?s)) * COUNT(*)) AS ?rank 
 FROM <urn:evc> 
 WHERE { ?s foaf:knows ?o }
-ORDER BY DESC (?rank)
+ORDER BY DESC (?rank) ;
+
+-- via evc_score Stored Procedure
+
+SPARQL
+ 
+SELECT ?s 
+       sql:evc_score ('urn:evc', ?s) AS ?evc 
+FROM <urn:evc> 
+WHERE { ?s foaf:knows ?o } 
+GROUP BY ?s 
+ORDER BY DESC (?evc) ;
+
+-- Eigen Vector Centrality (EVC) evc_score Variant 
+
+SPARQL
+
+SELECT ?s sql:evc_score (?g, ?s) AS ?evc 
+WHERE { 
+        GRAPH ?g { ?s foaf:knows ?o } 
+        FILTER (?g = <urn:evc> ) 
+      } 
+GROUP BY ?s 
+ORDER BY DESC (?evc)
+
 
