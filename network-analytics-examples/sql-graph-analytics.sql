@@ -80,7 +80,7 @@ GROUP BY subject ORDER BY 2 DESC ;
 
 -- Degree Centrality
 
-SELECT count(*)  
+SELECT count(*) AS cnt
 FROM ( 
         SELECT TRANSITIVE T_DISTINCT 
               T_IN (1) T_OUT (2) T_MIN (1) 
@@ -92,7 +92,7 @@ WHERE k.subject = 'a' ;
 
 -- Closeness Centrality 
 
-SELECT sum(step)  
+SELECT subject, object, sum(step) AS steps
 FROM ( 
         SELECT TRANSITIVE T_DISTINCT 
                T_IN (1) T_OUT (2) T_MIN (1)  
@@ -101,20 +101,22 @@ FROM (
                T_STEP ('step_no') AS step 
         FROM demo..knows 
      ) AS k 
-WHERE k.subject = 'a' ;
+WHERE k.subject = 'a' 
+GROUP BY subject, object ;
 
 -- Betweeness Centrality 
 
-SELECT A.object AS via, COUNT (  1) AS cnt
+SELECT A.object AS via, COUNT (1) AS cnt
 FROM (
-        SELECT TRANSITIVE T_MIN( 1) T_OUT(2) T_IN(1) T_DISTINCT 
-              subject,
-              object, 
-              T_STEP( 'step_no' ) AS dist_to_via
+        SELECT TRANSITIVE T_DISTINCT  T_MIN(1) 
+               T_OUT(2) T_IN(1)
+               subject,
+               object, 
+               T_STEP( 'step_no' ) AS dist_to_via
           FROM demo..knows
       ) AS A
 INNER JOIN (
-              SELECT TRANSITIVE T_DISTINCT T_SHORTEST_ONLY T_MIN( 1)
+              SELECT  TRANSITIVE T_DISTINCT T_SHORTEST_ONLY T_MIN(1)
                       T_OUT(2) T_IN(1)  
                       subject,
                       object, 
@@ -122,6 +124,55 @@ INNER JOIN (
               FROM demo..knows
             ) AS B
 ON (A.object = B.subject)
-WHERE A.subject =  'i'
+WHERE A.subject =  'a'
 GROUP BY A.object
 ORDER BY 2 DESC   ;
+
+-- Betweeness Detailed Paths
+
+SELECT A.subject, A.dist_to_via, A.object AS via,  B.object
+FROM (
+        SELECT TRANSITIVE T_DISTINCT  T_MIN(1) 
+               T_OUT(2) T_IN(1)
+               subject,
+               object, 
+               T_STEP( 'step_no' ) AS dist_to_via
+          FROM demo..knows
+      ) AS A
+INNER JOIN (
+              SELECT  TRANSITIVE T_DISTINCT T_SHORTEST_ONLY T_MIN(1)
+                      T_OUT(2) T_IN(1)  
+                      subject,
+                      object, 
+                      T_STEP( 'step_no' ) AS dist_from_via
+              FROM demo..knows
+            ) AS B
+ON (A.object = B.subject)
+WHERE A.subject =  'a'
+AND B.object <> 'a'
+-- 	GROUP BY A.subject, A.dist_to_via, A.object, B.object
+ORDER BY 3 DESC   ;
+
+-- More Betweenness Examples
+
+SELECT subject, object, step AS steps, path
+FROM ( 
+        SELECT TRANSITIVE T_DISTINCT 
+               T_IN (1) T_OUT (2) T_MIN (1)  
+               subject, 
+               object , 
+               T_STEP ('step_no') AS step,
+                T_STEP ('path_id') AS path
+        FROM demo..knows 
+     ) AS k 
+WHERE k.subject = 'c' AND k.object = 'j'
+-- GROUP BY subject, object ;
+ORDER BY steps DESC  ;
+
+
+-- Eigen Vector Centrality EVC
+
+SELECT subj, evc
+FROM DB.DBA.evcc (gr) (subj varchar, evc int) x  
+WHERE gr = 'urn:evc' 
+ORDER BY evc DESC, subj ASC ;
