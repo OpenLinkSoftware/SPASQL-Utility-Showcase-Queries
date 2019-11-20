@@ -71,7 +71,7 @@ CREATE PROCEDURE DB.DBA.EVC_SCORE (in gr any, in tgt any)
 
 -- Grant Execute to SPARQL
 
-GRANT EXECUTE ON DB.DBA.evc_score TO "SPARQL_SELECT"
+GRANT EXECUTE ON DB.DBA.evc_score TO "SPARQL_SELECT" ;
 
 -- Eigen Vector Centrality (EVC) SPARQL Test Query 
 
