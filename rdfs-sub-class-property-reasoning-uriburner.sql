@@ -34,7 +34,7 @@ INSERT DATA
     GRAPH <urn:rdfs:subclass:subproperty:mappings>
       {
         schema:SearchAction rdfs:subClassOf    schema:Action . 
-		schema:HowToStep    rdfs:subClassOf    opl:StepByGuide .
+		opl:Step            rdfs:subClassOf    schema:HowToStep .
         opl:hasStepByGuide  rdfs:subPropertyOf schema:step .
         opl:hasIndex        rdfs:subPropertyOf schema:position .
         opl:hasNext         rdfs:subPropertyOf schema:nextItem .
@@ -59,6 +59,7 @@ WHERE RS_NAME = 'urn:rdfs:subclass:subproperty:inference:rules' ;
 -- Test Query 1
 
 SPARQL
+
 DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
 
 PREFIX    owl: <http://www.w3.org/2002/07/owl#>
@@ -75,27 +76,7 @@ WHERE
     ?s a schema:HowToStep .
   } ;
 
--- Test Query 1.1
-
-SPARQL
-
-DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
-
-PREFIX    owl: <http://www.w3.org/2002/07/owl#>
-PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX    bmo: <http://purl.org/bmo/ns#>
-PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
-PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <http://schema.org/>
-PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
-
-SELECT DISTINCT ?s
-WHERE
-  {
-    ?s a schema:HowToStep .
-  } ;
-
--- Test Query 1.2 Rules Disabled
+-- Test Query 1.1 Rules Disabled
 
 SPARQL
 
@@ -115,10 +96,11 @@ WHERE
     ?s a schema:HowToStep .
   } ;
 
+
 -- Test 2
 
 SPARQL
-
+# DEFINE get:soft "soft"
 DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
 
 PREFIX    owl: <http://www.w3.org/2002/07/owl#>
@@ -130,8 +112,9 @@ PREFIX schema: <http://schema.org/>
 PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
 SELECT DISTINCT ?s  ?o
+FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/describing-virtuoso-72-windows-installation-steps.ttl> 
 WHERE {
-        ?s a               schema:HowToStep ;
+        ?s a schema:HowToStep ;
            schema:position ?o
       } ;
 
@@ -150,9 +133,10 @@ PREFIX schema: <http://schema.org/>
 PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
 SELECT DISTINCT ?s  ?o
+FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/describing-virtuoso-72-windows-installation-steps.ttl> 
 WHERE
   {
-    ?s a               schema:HowToStep ;
+    ?s a schema:HowToStep ;
        schema:position ?o
   } ;
 
