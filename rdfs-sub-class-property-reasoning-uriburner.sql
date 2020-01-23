@@ -33,7 +33,8 @@ INSERT DATA
   {
     GRAPH <urn:rdfs:subclass:subproperty:mappings>
       {
-        schema:HowToStep    rdfs:subClassOf    opl:StepByGuide .
+        schema:SearchAction rdfs:subClassOf    schema:Action . 
+		schema:HowToStep    rdfs:subClassOf    opl:StepByGuide .
         opl:hasStepByGuide  rdfs:subPropertyOf schema:step .
         opl:hasIndex        rdfs:subPropertyOf schema:position .
         opl:hasNext         rdfs:subPropertyOf schema:nextItem .
@@ -77,6 +78,7 @@ WHERE
 -- Test Query 1.1
 
 SPARQL
+
 DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
 
 PREFIX    owl: <http://www.w3.org/2002/07/owl#>
@@ -96,6 +98,7 @@ WHERE
 -- Test Query 1.2 Rules Disabled
 
 SPARQL
+
 # DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
 
 PREFIX    owl: <http://www.w3.org/2002/07/owl#>
@@ -115,6 +118,7 @@ WHERE
 -- Test 2
 
 SPARQL
+
 DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
 
 PREFIX    owl: <http://www.w3.org/2002/07/owl#>
@@ -134,6 +138,7 @@ WHERE {
 -- Test 2.1
 
 SPARQL
+
 # DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
 
 PREFIX    owl: <http://www.w3.org/2002/07/owl#>
@@ -150,3 +155,87 @@ WHERE
     ?s a               schema:HowToStep ;
        schema:position ?o
   } ;
+
+
+-- Test 3
+
+SPARQL
+
+DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
+
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
+
+SELECT DISTINCT COUNT (*) 
+WHERE {
+        ?s a schema:Action .
+      }  ;
+
+-- Test 3.1
+
+SPARQL
+
+# DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
+
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
+
+SELECT DISTINCT COUNT (*) 
+WHERE {
+        ?s a schema:Action .
+      }  ;
+
+-- Test 3.2
+
+SPARQL
+
+DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
+
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
+
+SELECT DISTINCT ?name  
+WHERE {
+        ?s a schema:Action ;
+		   schema:name ?name . 
+		FILTER (CONTAINS(?name,"Search"))
+      } 
+LIMIT 50 ;
+
+
+-- Test 3.3
+
+SPARQL
+
+DEFINE input:inference 'urn:rdfs:subclass:subproperty:inference:rules'
+
+PREFIX    owl: <http://www.w3.org/2002/07/owl#>
+PREFIX   rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX    bmo: <http://purl.org/bmo/ns#>
+PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/Person>
+PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
+
+SELECT DISTINCT ?name  
+WHERE {
+        ?s a schema:Action ;
+		   schema:name ?name . 
+		FILTER (CONTAINS(?name,"Search"))
+      }  
+LIMIT 50 ;
