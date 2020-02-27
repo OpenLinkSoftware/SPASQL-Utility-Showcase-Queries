@@ -1,9 +1,13 @@
-SPARQL CLEAR GRAPH <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
+-- SPARQL CLEAR GRAPH <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
+-- SPARQL CLEAR GRAPH <http://www.productontology.org/dump.rdf> ;
+-- SPARQL CLEAR GRAPH <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> ;
 
 DELETE FROM DB.DBA.SYS_RDF_SCHEMA 
 WHERE RS_NAME = 'urn:owl:equivalent:class:inference:rules' ; 
 
 SPARQL DEFINE get:soft "no-sponge" LOAD <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
+SPARQL DEFINE get:soft "no-sponge" LOAD <http://www.productontology.org/dump.rdf> ;
+SPARQL DEFINE get:soft "no-sponge" LOAD <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> ;
 
 SPARQL
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
