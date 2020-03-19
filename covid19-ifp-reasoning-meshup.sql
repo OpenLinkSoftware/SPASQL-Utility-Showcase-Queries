@@ -29,7 +29,7 @@ PREFIX nextstrain-ncov: <https://github.com/nextstrain/ncov/raw/master/data/meta
 
 INSERT DATA INTO  <urn:covid19:data:meshup> { 
 											   consolidated:id owl:equivalentProperty testing-2:dbpedia_country_id, nextstrain:dbpedia_country_id ;
-                                                                            a owl:InverseFunctionalProperty ;
+                                                                            # a owl:InverseFunctionalProperty ;
                                                                             rdfs:subPropertyOf lod:ifp_like .
 
                                                nextstrain:genebank_accession owl:equivalentProperty sarscov2:Accession, nextstrain-ncov:genebank_accession ;
