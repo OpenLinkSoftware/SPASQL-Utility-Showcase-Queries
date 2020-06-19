@@ -27,9 +27,11 @@ INSERT DATA {
 };
 
 SPARQL ADD <http://www.productontology.org/dump.rdf> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
-SPARQL ADD <kbpedia_reference_concepts_linkage_inferrence_extended.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
 SPARQL ADD <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
-
+SPARQL ADD <https://raw.githubusercontent.com/Cognonto/kbpedia/master/versions/2.50/kko.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts_linkage.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts_linkage_inferrence_extended.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
 
 SPARQL 
 
