@@ -46,7 +46,11 @@ INSERT DATA
 SPARQL ADD <http://www.productontology.org/dump.rdf> TO <urn:equivalent:class:property:mappings> ;
 SPARQL ADD <kbpedia_reference_concepts_linkage_inferrence_extended.n3> TO <urn:equivalent:class:property:mappings> ;
 SPARQL ADD <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> TO <urn:equivalent:class:property:mappings> ;
-SPARQL ADD <http://kbpedia.org/knowledge-graph#> TO <urn:equivalent:class:property:mappings> ;
+SPARQL ADD <file:kbpedia_25_reference_concepts.n3> TO <urn:equivalent:class:property:mappings>  ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts_linkage.n3> TO <urn:equivalent:class:property:mappings>  ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts_linkage_inferrence_extended.n3> TO <urn:equivalent:class:property:mappings>  ;  
+
+
 
 SPARQL
 SELECT ( COUNT ( * ) AS ?count )
