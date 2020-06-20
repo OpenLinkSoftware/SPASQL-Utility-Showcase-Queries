@@ -1,3 +1,5 @@
+LOG_ENABLE(2,1) ;
+
 -- Cleanup
 
 SPARQL CLEAR GRAPH <urn:equivalent:class:property:mappings> ;
@@ -27,6 +29,8 @@ PREFIX   fibo: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Pe
 PREFIX   foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX schema: <http://schema.org/>
 PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
+PREFIX opltwt: <http://www.openlinksw.com/schemas/twitter#>
+PREFIX activity: <http://www.w3.org/ns/activitystreams#> 
 PREFIX       : <#>
 
 INSERT DATA
@@ -38,6 +42,7 @@ INSERT DATA
         opl:hasIndex           rdfs:subPropertyOf  schema:position .
         opl:hasNext            rdfs:subPropertyOf  schema:nextItem .
         opl:hasPrevious        rdfs:subPropertyOf  schema:previousItem .
+        activity:Note          rdfs:subClassOf     opltwt:Tweet . 
         owl:equivalentProperty a                   owl:TransitiveProperty .
         owl:equivalentClass    a                   owl:TransitiveProperty .
       }
