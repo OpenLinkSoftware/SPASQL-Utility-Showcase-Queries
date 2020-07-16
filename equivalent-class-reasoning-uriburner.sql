@@ -1,9 +1,13 @@
-SPARQL CLEAR GRAPH <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
+-- SPARQL CLEAR GRAPH <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
+-- SPARQL CLEAR GRAPH <http://www.productontology.org/dump.rdf> ;
+-- SPARQL CLEAR GRAPH <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> ;
 
 DELETE FROM DB.DBA.SYS_RDF_SCHEMA 
 WHERE RS_NAME = 'urn:owl:equivalent:class:inference:rules' ; 
 
 SPARQL DEFINE get:soft "no-sponge" LOAD <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
+SPARQL DEFINE get:soft "no-sponge" LOAD <http://www.productontology.org/dump.rdf> ;
+SPARQL DEFINE get:soft "no-sponge" LOAD <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> ;
 
 SPARQL
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -23,9 +27,11 @@ INSERT DATA {
 };
 
 SPARQL ADD <http://www.productontology.org/dump.rdf> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ;
-SPARQL ADD <kbpedia_reference_concepts_linkage_inferrence_extended.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
 SPARQL ADD <http://mappings.dbpedia.org/server/ontology/dbpedia.owl> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
-
+SPARQL ADD <https://raw.githubusercontent.com/Cognonto/kbpedia/master/versions/2.50/kko.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts_linkage.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
+SPARQL ADD <file:kbpedia_25_reference_concepts_linkage_inferrence_extended.n3> TO <http://www.openlinksw.com/data/turtle/ontology_mappings/schemas_mappings/SchemaOrgToOpenLink.ttl> ; 
 
 SPARQL 
 

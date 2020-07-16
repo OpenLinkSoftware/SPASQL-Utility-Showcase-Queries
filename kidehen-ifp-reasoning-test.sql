@@ -23,11 +23,19 @@ PREFIX schema: <http://schema.org/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
 
 INSERT DATA INTO  <http://xmlns.com/foaf/0.1/> { 
-												 foaf:mbox a owl:InverseFunctionalProperty ;
-												 			 rdfs:subPropertyOf lod:ifp_like .
-												 schema:sameAs a owl:InverseFunctionalProperty ;
-												     		  rdfs:subPropertyOf lod:ifp_like .
-												}  ;
+						  foaf:mbox a owl:InverseFunctionalProperty ;
+						  rdfs:subPropertyOf lod:ifp_like .
+						  foaf:homepage a owl:InverseFunctionalProperty ;
+						  rdfs:subPropertyOf lod:ifp_like .
+						  schema:sameAs a owl:InverseFunctionalProperty ;
+						  rdfs:subPropertyOf lod:ifp_like .
+						  schema:mainEntityOfPage a owl:InverseFunctionalProperty ;
+						  rdfs:subPropertyOf lod:ifp_like .
+						  schema:uri a owl:InverseFunctionalProperty ;
+						  rdfs:subPropertyOf lod:ifp_like .
+						  dcterms:identifier a owl:InverseFunctionalProperty ;
+						  rdfs:subPropertyOf lod:ifp_like .
+						}  ;
 
 -- Make Rule
 
