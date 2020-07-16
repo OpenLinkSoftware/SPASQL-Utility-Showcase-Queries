@@ -1,6 +1,8 @@
+SPARQL CLEAR GRAPH <urn:uriburner:ontology:fixes>  ;
+
 SPARQL
 
-PREFIX ontology: <https://www.omg.org/spec/DOL/20171106/DOL-terms#> 
+PREFIX ontology: <http://www.omg.org/spec/DOL/DOL-terms/> 
 PREFIX ontology-doc: <https://www.omg.org/spec/DOL/20171106/DOL-terms.rdf> 
 PREFIX vocab: <http://open.vocab.org/terms/>
 PREFIX wdrs: <http://www.w3.org/2007/05/powder-s#>
