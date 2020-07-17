@@ -331,6 +331,7 @@ EXEC ('SPARQL ' || SPARQL_SPIN_GRAPH_TO_DEFSPIN('urn:spin:nanotation:demo:royal:
 SPARQL 
 DEFINE input:macro-lib <urn:spin:nanotation:demo:royal:family:lib>
 PREFIX  rel:  <http://purl.org/vocab/relationship/> 
+						
 WITH <urn:spin:nanotation:demo:royal:family>
 SELECT *
 WHERE { ?s a <#RoyalPerson> . };
@@ -340,6 +341,7 @@ WHERE { ?s a <#RoyalPerson> . };
 SPARQL 
 DEFINE input:macro-lib <urn:spin:nanotation:demo:royal:family:lib>
 PREFIX  rel:  <http://purl.org/vocab/relationship/> 
+						
 WITH <urn:spin:nanotation:demo:royal:family>
 SELECT *
 WHERE { ?s a ?t . };
@@ -349,6 +351,7 @@ WHERE { ?s a ?t . };
 SPARQL 
 DEFINE input:macro-lib <urn:spin:nanotation:demo:royal:family:lib>
 PREFIX  rel:  <http://purl.org/vocab/relationship/> 
+						
 WITH <urn:spin:nanotation:demo:royal:family>
 SELECT *
 WHERE { ?s a <#RoyalPerson> ; rel:siblingOf ?sibling . };
@@ -357,6 +360,7 @@ WHERE { ?s a <#RoyalPerson> ; rel:siblingOf ?sibling . };
 SPARQL 
 DEFINE input:macro-lib <urn:spin:nanotation:demo:royal:family:lib>
 PREFIX  rel:  <http://purl.org/vocab/relationship/> 
+						
 WITH <urn:spin:nanotation:demo:royal:family>
 SELECT *
 WHERE { ?s a <#RoyalPerson> ; rel:grandParent ?gp . };
@@ -364,12 +368,15 @@ WHERE { ?s a <#RoyalPerson> ; rel:grandParent ?gp . };
 -- Test 5 
 
 SPARQL
-DEFINE input:macro-lib <urn:spin:nanotation:demo:royal:family:lib>
-PREFIX  rel:  <http://purl.org/vocab/relationship/>
+DEFINE input:macro-lib <urn:spin:nanotation:demo:royal:family:lib>  
+PREFIX  rel:  <http://purl.org/vocab/relationship/> 
+
 WITH <urn:spin:nanotation:demo:royal:family>
-SELECT ?person rel:ancestorOf as ?relation ?descendant
-WHERE { ?person a <#RoyalPerson> ;
-           rel:ancestorOf ?descendant . } ;
+SELECT ?descendant rel:ancestorOf as ?relation ?ancestor
+WHERE { ?ancestor a <#RoyalPerson> ; 
+           rel:ancestorOf ?descendant
+           FILTER (?descendant = dbpedia:Prince_William_of_Wales)
+	  }
 
 -- Test 6
 	  
