@@ -91,4 +91,41 @@ SELECT *
 WHERE {
                 ?s a kbpedia:Actor .
           } ;
+          
+-- Test 3.1 
 
+SPARQL
+
+DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bmo: <http://purl.org/bmo/ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
+
+SELECT DISTINCT ?s ?o
+WHERE {
+                ?s a kbpedia:Actor ;
+                   owl:sameAs ?o
+          } 
+LIMIT 100 ;
+
+-- Test 3.2 
+
+SPARQL
+
+# DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bmo: <http://purl.org/bmo/ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
+
+SELECT DISTINCT ?s ?o
+WHERE {
+                ?s a kbpedia:Actor ;
+                   owl:sameAs ?o
+          } 
+LIMIT 100 ;
