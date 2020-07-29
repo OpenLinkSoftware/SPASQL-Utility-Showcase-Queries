@@ -78,7 +78,7 @@ WHERE
                     ?entity ?p ?class.
                     FILTER (?p = wdt:P106 && ?class = wd:Q674067).
                 }
-            LIMIT 500
+            LIMIT 100
         }
         
     };
