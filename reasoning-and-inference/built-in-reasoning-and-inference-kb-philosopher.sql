@@ -12,12 +12,9 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT  
-    { 
-        GRAPH <urn:qa:ifr:kbpedia:philosopher:tbox>
-            {
-                ?class a ?o
-            }
+INSERT INTO GRAPH <urn:qa:ifr:kbpedia:philosopher:tbox>
+    {
+        ?class a ?o
     }
 
 WHERE
@@ -44,13 +41,10 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT 
-    { 
-        GRAPH <urn:qa:ifr:wikidata:philosopher:tbox>
+INSERT INTO GRAPH <urn:qa:ifr:wikidata:philosopher:tbox>
             {
                 ?class a ?o
             }
-    }
 WHERE
     {
         SERVICE <https://wikidata.demo.openlinksw.com/sparql>
@@ -120,8 +114,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT {
-         GRAPH <https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip> 
+INSERT INTO  GRAPH <https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip> 
             {
                 kbpedia:Philosopher owl:equivalentClass wd:Q4964182 .
                #wd:Q4964182 owl:equivalentClass kbpedia:Philosopher .
@@ -130,8 +123,7 @@ INSERT {
                 owl:equivalentClass a owl:TransitiveProperty.  
                 rdfs:subPropertyOf a owl:TransitiveProperty .
                 rdfs:subClassOf a owl:TransitiveProperty . 
-            }
-       } ;
+            };
 
 RDFS_RULE_SET ('urn:kbpedia:philosopher:owl:equivalent:class:subproperty:inference:rules', 'https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip') ;
 
