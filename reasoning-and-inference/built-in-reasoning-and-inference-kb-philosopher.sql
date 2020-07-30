@@ -161,9 +161,10 @@ PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a kbpedia:Philosopher .
-      } ;
+    } ;
 
 
 -- Test 1.2: without reasoning
@@ -180,9 +181,10 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a kbpedia:Philosopher .
-      } ;
+    } ;
 
 -- Tests
 
@@ -202,9 +204,10 @@ PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a wd:Q4964182 .
-      } ;
+    } ;
 
 -- Test 2.2: without reasoning
 
@@ -220,6 +223,7 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a wd:Q4964182 .
-      } ;
+    } ;

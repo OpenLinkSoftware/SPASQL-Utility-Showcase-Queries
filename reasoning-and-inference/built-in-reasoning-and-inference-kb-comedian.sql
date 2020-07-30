@@ -146,9 +146,10 @@ DEFINE input:inference 'urn:kbpedia:comedian:owl:equivalent:class:subproperty:in
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a kbpedia:Comedian .
-          } ;
+WHERE 
+    {
+        ?s a kbpedia:Comedian .
+    } ;
 
 
 -- Test 1.2: without reasoning
@@ -158,9 +159,10 @@ SPARQL
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a kbpedia:Comedian .
-          } ;
+WHERE 
+    {
+        ?s a kbpedia:Comedian .
+    } ;
 
 -- Tests
 
@@ -171,9 +173,10 @@ DEFINE input:inference 'urn:kbpedia:comedian:owl:equivalent:class:subproperty:in
 PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a wd:Q245068 .
-          } ;
+WHERE 
+    {
+        ?s a wd:Q245068 .
+    } ;
 
 -- Test 2.2: without reasoning
 SPARQL
@@ -181,6 +184,7 @@ SPARQL
 PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a wd:Q245068 .
-          } ;
+WHERE 
+    {
+        ?s a wd:Q245068 .
+    } ;

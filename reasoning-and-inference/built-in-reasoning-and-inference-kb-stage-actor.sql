@@ -12,11 +12,13 @@ PREFIX wd: <http://www.wikidata.org/prop/direct/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 
-INSERT INTO GRAPH <urn:qa:ifr:kbpedia:stage-actor:tbox>
-    {
-        ?class a ?o
-    }
-
+INSERT
+{ 
+    GRAPH <urn:qa:ifr:kbpedia:stage-actor:tbox>
+        {
+            ?class a ?o
+        }
+}
 WHERE
     {
         SERVICE <https://wikidata.demo.openlinksw.com/sparql>
@@ -40,9 +42,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <urn:qa:ifr:wikidata:stage-actor:tbox>
-    {
-        ?class a ?o.
+INSERT 
+    { 
+        GRAPH <urn:qa:ifr:wikidata:stage-actor:tbox>
+            {
+                ?class a ?o
+            }
     }
 WHERE
     {
@@ -66,9 +71,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <urn:qa:ifr:wikidata:stage-actor:abox>
+INSERT 
     {
-        ?entity ?p ?class
+        GRAPH <urn:qa:ifr:wikidata:stage-actor:abox>
+            {
+                ?entity ?p ?class
+            }
     }
 WHERE
     {
@@ -114,7 +122,8 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip> 
+INSERT {
+         GRAPH <https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip> 
             {
                 kbpedia:ActorInPlays owl:equivalentClass wd:Q2259451 .
                 wdt:P106 rdfs:subPropertyOf rdf:type .
@@ -122,7 +131,8 @@ INSERT INTO GRAPH <https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/
                 owl:equivalentClass a owl:TransitiveProperty.  
                 rdfs:subPropertyOf a owl:TransitiveProperty .
                 rdfs:subClassOf a owl:TransitiveProperty . 
-            };
+            }
+       } ;
 
 RDFS_RULE_SET ('urn:kbpedia:stage-actor:owl:equivalent:class:subproperty:inference:rules', 'https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip') ;
 
@@ -140,9 +150,10 @@ DEFINE input:inference 'urn:kbpedia:stage-actor:owl:equivalent:class:subproperty
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a kbpedia:ActorInPlays .
-          } ;
+WHERE 
+    {
+        ?s a kbpedia:ActorInPlays .
+    } ;
 
 
 -- Test 1.2: without reasoning
@@ -152,9 +163,10 @@ SPARQL
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a kbpedia:ActorInPlays .
-          } ;
+WHERE 
+    {
+        ?s a kbpedia:ActorInPlays .
+    } ;
 
 -- Tests
 
@@ -165,9 +177,10 @@ DEFINE input:inference 'urn:kbpedia:stage-actor:owl:equivalent:class:subproperty
 PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a wd:Q2259451 .
-          } ;
+WHERE 
+    {
+        ?s a wd:Q2259451 .
+    } ;
 
 -- Test 2.2: without reasoning
 SPARQL
@@ -176,5 +189,5 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT COUNT(*)
 WHERE {
-                ?s a wd:Q2259451 .
-          } ;
+        ?s a wd:Q2259451 .
+       } ;
