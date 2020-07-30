@@ -9,9 +9,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO  GRAPH <urn:qa:ifr:kbpedia:comedian:tbox>
+INSERT 
     {
-        ?class a ?o
+        GRAPH <urn:qa:ifr:kbpedia:comedian:tbox>
+            {
+                ?class a ?o
+            }
     }
 WHERE
     {
@@ -35,9 +38,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <urn:qa:ifr:wikidata:comedian:tbox>
+INSERT 
     {
-        ?class a ?o
+        GRAPH <urn:qa:ifr:wikidata:comedian:tbox>
+            {
+                ?class a ?o
+            }
     }
 WHERE
     {
@@ -61,10 +67,13 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <urn:qa:ifr:wikidata:comedian:abox>
-    {
-        ?entity ?p ?class
-    }
+INSERT 
+{ 
+    GRAPH <urn:qa:ifr:wikidata:comedian:abox>
+        {
+            ?entity ?p ?class
+        }
+}
 
 WHERE
     {
@@ -108,17 +117,18 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip> 
-    {
-        kbpedia:Comedian owl:equivalentClass wd:Q245068 .
-       #wd:Q245068 owl:equivalentClass kbpedia:Comedian .
-        wdt:P106 rdfs:subPropertyOf rdf:type .
-        owl:equivalentProperty a owl:TransitiveProperty . 
-        owl:equivalentClass a owl:TransitiveProperty.  
-        rdfs:subPropertyOf a owl:TransitiveProperty .
-        rdfs:subClassOf a owl:TransitiveProperty . 
-    };
-
+INSERT {
+         GRAPH <https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip> 
+            {
+                kbpedia:Comedian owl:equivalentClass wd:Q245068 .
+               #wd:Q245068 owl:equivalentClass kbpedia:Comedian .
+                wdt:P106 rdfs:subPropertyOf rdf:type .
+                owl:equivalentProperty a owl:TransitiveProperty . 
+                owl:equivalentClass a owl:TransitiveProperty.  
+                rdfs:subPropertyOf a owl:TransitiveProperty .
+                rdfs:subClassOf a owl:TransitiveProperty . 
+            }
+       } ;
 
 RDFS_RULE_SET ('urn:kbpedia:comedian:owl:equivalent:class:subproperty:inference:rules', 'https://github.com/Cognonto/kbpedia/raw/master/versions/2.50/kbpedia_reference_concepts.zip') ;
 
