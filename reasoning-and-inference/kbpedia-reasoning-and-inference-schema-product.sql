@@ -49,6 +49,8 @@ WHERE {
 -- Test query 1.4: Query without inference rule, nor same-as pragma
 
 SPARQL
+#DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
+#DEFINE input:same-as "yes"
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bmo: <http://purl.org/bmo/ns#>
@@ -59,14 +61,15 @@ PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 SELECT DISTINCT ?s
 WHERE {
         ?s a schema:Product .
-       } ;
+       } 
 
-LIMIT 100
+LIMIT 100;
 
 -- Test query 1.5: Query with inference rule, without same-as pragma
 
 SPARQL
 DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
+#DEFINE input:same-as "yes"
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bmo: <http://purl.org/bmo/ns#>
@@ -77,9 +80,9 @@ PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 SELECT DISTINCT ?s
 WHERE {
         ?s a schema:Product .
-       } ;
+       } 
 
-LIMIT 100
+LIMIT 100;
 
 -- Test query 1.6: Query with inference rule andsame-as pragma
 
@@ -96,6 +99,6 @@ PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 SELECT DISTINCT ?s
 WHERE {
         ?s a schema:Product .
-       } ;  
+       }   
 
-LIMIT 100     
+LIMIT 100;     
