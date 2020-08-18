@@ -1,6 +1,8 @@
 -- Test query 1.1: COUNT-focused query without inference rule, nor same-as pragma
 
 SPARQL
+#DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
+#DEFINE input:same-as "yes"
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bmo: <http://purl.org/bmo/ns#>
@@ -17,6 +19,7 @@ WHERE {
 
 SPARQL
 DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
+#DEFINE input:same-as "yes"
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bmo: <http://purl.org/bmo/ns#>
@@ -101,4 +104,4 @@ WHERE {
         ?s a schema:Product .
        }   
 
-LIMIT 100;     
+LIMIT 100;    
