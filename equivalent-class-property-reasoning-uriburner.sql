@@ -45,6 +45,8 @@ INSERT DATA
         activity:Note          rdfs:subClassOf     opltwt:Tweet . 
         owl:equivalentProperty a                   owl:TransitiveProperty .
         owl:equivalentClass    a                   owl:TransitiveProperty .
+        rdfs:subPropertyOf     a                   owl:TransitiveProperty .
+        rdfs:subClassOf        a                   owl:TransitiveProperty .
       }
   } ;
 
