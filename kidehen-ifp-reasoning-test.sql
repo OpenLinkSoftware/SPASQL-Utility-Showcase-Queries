@@ -15,35 +15,35 @@ SPARQL
 DEFINE get:soft "no-sponge"
 LOAD <http://xmlns.com/foaf/0.1/> ;
 
--- Adding IFP Relations to FOAF Named Graph
+-- Adding IFP Relations to Named Graph to be used for Inference Rule
 
 SPARQL
 PREFIX lod:  <http://lod.openlinksw.com/> 
 PREFIX schema: <http://schema.org/> 
 PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
 
-INSERT DATA INTO  <http://xmlns.com/foaf/0.1/> { 
-						  foaf:mbox a owl:InverseFunctionalProperty ;
-						  rdfs:subPropertyOf lod:ifp_like .
-						  foaf:homepage a owl:InverseFunctionalProperty ;
-						  rdfs:subPropertyOf lod:ifp_like .
-						  schema:sameAs a owl:InverseFunctionalProperty ;
-						  rdfs:subPropertyOf lod:ifp_like .
-						  schema:mainEntityOfPage a owl:InverseFunctionalProperty ;
-						  rdfs:subPropertyOf lod:ifp_like .
-						  schema:uri a owl:InverseFunctionalProperty ;
-						  rdfs:subPropertyOf lod:ifp_like .
-						  dcterms:identifier a owl:InverseFunctionalProperty ;
-						  rdfs:subPropertyOf lod:ifp_like .
-						}  ;
+INSERT DATA INTO  <urn:ifp:inference:rule> { 
+                                                foaf:mbox a owl:InverseFunctionalProperty ;
+                                                rdfs:subPropertyOf lod:ifp_like .
+                                                foaf:homepage a owl:InverseFunctionalProperty ;
+                                                rdfs:subPropertyOf lod:ifp_like .
+                                                schema:sameAs a owl:InverseFunctionalProperty ;
+                                                rdfs:subPropertyOf lod:ifp_like .
+                                                schema:mainEntityOfPage a owl:InverseFunctionalProperty ;
+                                                rdfs:subPropertyOf lod:ifp_like .
+                                                schema:uri a owl:InverseFunctionalProperty ;
+                                                rdfs:subPropertyOf lod:ifp_like .
+                                                dcterms:identifier a owl:InverseFunctionalProperty ;
+                                                rdfs:subPropertyOf lod:ifp_like .
+					    }  ;
 
 -- Make Rule
 
 RDFS_RULE_SET
    (
         'urn:ifp:inference:rule'  ,
-        'http://xmlns.com/foaf/0.1/'
- ) ;
+        'urn:ifp:inference:rule'
+   ) ;
 
 -- Verify Rule Creation
 
