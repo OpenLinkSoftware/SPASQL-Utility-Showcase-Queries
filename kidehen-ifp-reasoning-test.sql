@@ -22,7 +22,7 @@ PREFIX lod:  <http://lod.openlinksw.com/>
 PREFIX schema: <http://schema.org/> 
 PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
 
-INSERT DATA INTO  <urn:ifp:inference:rule> { 
+INSERT DATA INTO  <urn:ifp:inference:rule:tbox:data> { 
                                                 foaf:mbox a owl:InverseFunctionalProperty ;
                                                 rdfs:subPropertyOf lod:ifp_like .
                                                 foaf:homepage a owl:InverseFunctionalProperty ;
@@ -35,15 +35,16 @@ INSERT DATA INTO  <urn:ifp:inference:rule> {
                                                 rdfs:subPropertyOf lod:ifp_like .
                                                 dcterms:identifier a owl:InverseFunctionalProperty ;
                                                 rdfs:subPropertyOf lod:ifp_like .
-					    }  ;
+						                    }  ;
+
 
 -- Make Rule
 
 RDFS_RULE_SET
    (
         'urn:ifp:inference:rule'  ,
-        'urn:ifp:inference:rule'
-   ) ;
+        'urn:ifp:inference:rule:tbox:data'
+ ) ;
 
 -- Verify Rule Creation
 
