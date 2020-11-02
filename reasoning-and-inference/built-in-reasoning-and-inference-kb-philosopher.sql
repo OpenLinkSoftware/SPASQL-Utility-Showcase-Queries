@@ -75,10 +75,13 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <urn:qa:ifr:wikidata:philosopher:abox>
-{
-    ?entity ?p ?class
-}
+INSERT
+    { 
+        GRAPH <urn:qa:ifr:wikidata:philosopher:abox>
+            {
+                ?entity ?p ?class
+            }
+    }
 
 WHERE
     {
@@ -158,9 +161,10 @@ PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a kbpedia:Philosopher .
-      } ;
+    } ;
 
 
 -- Test 1.2: without reasoning
@@ -177,9 +181,10 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a kbpedia:Philosopher .
-      } ;
+    } ;
 
 -- Tests
 
@@ -199,9 +204,10 @@ PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a wd:Q4964182 .
-      } ;
+    } ;
 
 -- Test 2.2: without reasoning
 
@@ -217,6 +223,7 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a wd:Q4964182 .
-      } ;
+    } ;
