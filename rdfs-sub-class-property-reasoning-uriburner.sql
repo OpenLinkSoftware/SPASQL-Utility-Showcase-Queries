@@ -112,7 +112,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
 SELECT DISTINCT ?s  ?o
-FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/describing-virtuoso-72-windows-installation-steps.ttl> 
+# FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/describing-virtuoso-72-windows-installation-steps.ttl> 
 WHERE {
         ?s a schema:HowToStep ;
            schema:position ?o
@@ -133,7 +133,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX    opl: <http://www.openlinksw.com/ontology/stepbyguide#>
 
 SELECT DISTINCT ?s  ?o
-FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/describing-virtuoso-72-windows-installation-steps.ttl> 
+# FROM <http://kingsley.idehen.net/public_home/kidehen/Public/Linked%20Data%20Documents/describing-virtuoso-72-windows-installation-steps.ttl> 
 WHERE
   {
     ?s a schema:HowToStep ;
