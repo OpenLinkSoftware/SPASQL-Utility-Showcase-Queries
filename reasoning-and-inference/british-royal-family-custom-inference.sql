@@ -269,12 +269,11 @@ spin:rule [ a sp:Construct ;
             sp:text """
 						## Cousin Relationship Type
 						
-                        CONSTRUCT { ?this <#hasCousin> ?n } 
+                        CONSTRUCT { ?this <#hasCousin> ?cousin } 
 					    WHERE {
 							     [] a <#RoyalPerson> ;
-								 rel:parentOf ?this ;
-								 rel:siblingOf ?n .
-								 ?n a <#MalePerson> .
+                                 rel:parentOf ?this ;
+								 rel:siblingOf [ rel:parentOf ?cousin ] .
 						     }
 					"""
 		 ] ;		
@@ -303,7 +302,7 @@ spin:rule [ a sp:Construct ;
 								  [] rel:parentOf ?n_prnt, ?this_prnt .
 								  ?n_prnt rel:parentOf ?n .
 								  ?this_prnt rel:parentOf ?this .
-								   filter (?n_prnt != ?this_prnt)
+								  FILTER (?n_prnt != ?this_prnt)
 					  		 }	
 					"""
 		 ] .			
