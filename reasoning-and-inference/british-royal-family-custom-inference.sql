@@ -1,4 +1,3 @@
-
 SPARQL DROP SPIN  LIBRARY <urn:spin:nanotation:demo:royal:family:lib> ; 
 SPARQL CLEAR GRAPH <urn:spin:nanotation:demo:royal:family>
 ;
@@ -159,7 +158,6 @@ SPARQL CLEAR GRAPH <urn:spin:nanotation:demo:royal:family:lib> ;
 TTLP ('
 ## Collection of Inference Rules that describe
 ## various British Royal Family Relationship Types
-
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix sp:    <http://spinrdf.org/sp#> .
 @prefix spl:    <http://spinrdf.org/spl#> .
@@ -171,7 +169,6 @@ TTLP ('
 @prefix  rel:  <http://purl.org/vocab/relationship/> .
 @prefix wdrs: <http://www.w3.org/2007/05/powder-s#> .
 @prefix schema: <http://schema.org/> .
-
 <#RoyalPerson>
 a rdfs:Class ;
 rdfs:label "A Royal Person"^^xsd:string ;
@@ -188,7 +185,6 @@ spin:rule
             			  }
 			"""
            ] ;
-
 		  
 spin:rule
           [ a sp:Construct ;
@@ -376,7 +372,7 @@ SELECT ?descendant rel:ancestorOf as ?relation ?ancestor
 WHERE { ?ancestor a <#RoyalPerson> ; 
            rel:ancestorOf ?descendant
            FILTER (?descendant = dbpedia:Prince_William_of_Wales)
-	  }
+      } ;
 
 -- Test 6
 	  
@@ -501,5 +497,3 @@ WHERE {
 		UNION 
 		{ ?person a foaf:Person; rel:ancestorOf ?hasDescendant . }
 	  } ;
-
-
