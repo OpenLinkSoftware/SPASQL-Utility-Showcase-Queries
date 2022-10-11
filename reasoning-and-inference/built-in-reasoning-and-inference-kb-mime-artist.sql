@@ -68,9 +68,12 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
-INSERT INTO GRAPH <urn:qa:ifr:wikidata:stage-actor:abox>
-{
-    ?entity ?p ?class
+INSERT
+    {
+        GRAPH <urn:qa:ifr:wikidata:stage-actor:abox>
+            {
+                ?entity ?p ?class
+            }
 }
 WHERE
     {
@@ -128,9 +131,10 @@ DEFINE input:inference 'urn:kbpedia:mime-artist:owl:equivalent:class:subproperty
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a kbpedia:Mime-Actor .
-      } ;
+    } ;
 
 
 -- Test 1.2: without reasoning
@@ -141,9 +145,10 @@ SPARQL
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a kbpedia:Mime-Actor .
-      } ;
+    } ;
 
 -- Tests
 
@@ -155,9 +160,10 @@ DEFINE input:inference 'urn:kbpedia:mime-artist:owl:equivalent:class:subproperty
 PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a wd:Q674067 .
-      } ;
+    } ;
 
 -- Test 2.2: without reasoning
 SPARQL
@@ -166,6 +172,7 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 
 
 SELECT COUNT(*)
-WHERE {
+WHERE 
+    {
         ?s a wd:Q674067 .
-       } ;
+    } ;

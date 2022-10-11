@@ -150,9 +150,10 @@ DEFINE input:inference 'urn:kbpedia:stage-actor:owl:equivalent:class:subproperty
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a kbpedia:ActorInPlays .
-          } ;
+WHERE 
+    {
+        ?s a kbpedia:ActorInPlays .
+    } ;
 
 
 -- Test 1.2: without reasoning
@@ -162,9 +163,10 @@ SPARQL
 PREFIX kbpedia: <http://kbpedia.org/kko/rc/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a kbpedia:ActorInPlays .
-          } ;
+WHERE 
+    {
+        ?s a kbpedia:ActorInPlays .
+    } ;
 
 -- Tests
 
@@ -175,9 +177,10 @@ DEFINE input:inference 'urn:kbpedia:stage-actor:owl:equivalent:class:subproperty
 PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT COUNT(*)
-WHERE {
-                ?s a wd:Q2259451 .
-          } ;
+WHERE 
+    {
+        ?s a wd:Q2259451 .
+    } ;
 
 -- Test 2.2: without reasoning
 SPARQL
@@ -186,5 +189,5 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 
 SELECT COUNT(*)
 WHERE {
-                ?s a wd:Q2259451 .
-          } ;
+        ?s a wd:Q2259451 .
+       } ;
