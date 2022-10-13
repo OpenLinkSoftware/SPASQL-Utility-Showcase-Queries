@@ -32,7 +32,7 @@ WHERE {
         ?s a schema:Product .
        } ;
 
--- Test query 1.3: COUNT-focused query with inference rule andsame-as pragma
+-- Test query 1.3: COUNT-focused query with inference rule and same-as pragma
 
 SPARQL
 DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
@@ -87,7 +87,7 @@ WHERE {
 
 LIMIT 100;
 
--- Test query 1.6: Query with inference rule andsame-as pragma
+-- Test query 1.6: Query with inference rule and same-as pragma
 
 SPARQL
 DEFINE input:inference 'urn:kbpedia:owl:equivalent:class:subproperty:inference:rules'
