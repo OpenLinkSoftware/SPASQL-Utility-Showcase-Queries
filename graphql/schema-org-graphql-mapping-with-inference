@@ -1,4 +1,9 @@
-    -- Inference Rule
+-- Showcases use of inference rules
+--
+-- Demonstrates how inference rules are incorporated into an RDF to GraphQL 
+-- schema mapping that invoked at runtime when producing a GraphQL query solution.
+
+-- Inference Rule
 
     SPARQL
 
